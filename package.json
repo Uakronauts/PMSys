@@ -1,6 +1,6 @@
 {
   "name": "pmsys",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "Project Management System (PMSys) for the University of Akron Akronauts Rocket Design Team",
   "main": "src/index.js",
   "scripts": {
@@ -34,13 +34,15 @@
     "extraResources": [],
     "appId": "com.electron.PMSys",
     "asar": "true",
-      "win": {
-      "publish": [{
-        "provider": "github",
-        "owner": "Uakronauts",
-        "repo": "PMSys",
-        "token": "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"
-      }],
+    "win": {
+      "publish": [
+        {
+          "provider": "github",
+          "owner": "Uakronauts",
+          "repo": "PMSys",
+          "token": "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"
+        }
+      ],
       "requestedExecutionLevel": "asInvoker"
     }
   },
