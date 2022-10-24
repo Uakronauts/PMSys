@@ -17,15 +17,15 @@ function createWindow() {
     autoHideMenuBar: true,
     title: projTitle
   })
-  mainWindow.loadFile('index.html'),
+  mainWindow.loadFile('src/GUI/index.html'),
   mainWindow.on('closed', function() {
     mainWindow = null;
   });
 
   //Uncomment when autoupdater is set up
-  // mainWindow.once('ready-to-show', () => {
-  //   autoUpdater.checkForUpdatesAndNotify();
-  // });
+  mainWindow.once('ready-to-show', () => {
+    autoUpdater.checkForUpdatesAndNotify();
+  });
 }
 
 app.on('ready', createWindow)
@@ -35,8 +35,6 @@ app.on('window-all-closed', () => {
   app.quit();
 });
 
-//uncomment when autoupdater is set up
-/*
 ipcMain.on('app-version', (event) =>{ //reads app version specified in package.json and sends to main window
   event.sender.send('app-version', {version: app.getVersion() });
 });
@@ -52,4 +50,3 @@ autoUpdater.on('update-downloaded', () =>{  //if update is downloaded send a sig
 ipcMain.on('restart_app', () => { // Restart and install the app
   autoUpdater.quitAndInstall();
 });
-*/

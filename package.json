@@ -1,8 +1,8 @@
 {
   "name": "pmsys",
-  "version": "0.1.0",
+  "version": "0.0.9",
   "description": "Project Management System (PMSys) for the University of Akron Akronauts Rocket Design Team",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -20,13 +20,29 @@
   },
   "dependencies": {
     "electron-updater": "^4.3.9",
-    "plotly.js-dist-min": "^2.6.1",
-    "python-shell": "^3.0.0"
+    "mysql": "^2.18.1",
+    "plotly.js-dist-min": "^2.6.1"
   },
   "author": "Aaron Hoffman & Jenice Mario",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Uakronauts/PMSys/issues"
+  },
+  "build": {
+    "productName": "PMSys",
+    "executableName": "PMSys",
+    "extraResources": [],
+    "appId": "com.electron.PMSys",
+    "asar": "true",
+      "win": {
+      "publish": [{
+        "provider": "github",
+        "owner": "Uakronauts",
+        "repo": "PMSys",
+        "token": "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"
+      }],
+      "requestedExecutionLevel": "asInvoker"
+    }
   },
   "homepage": "https://github.com/Uakronauts/PMSys#readme"
 }
