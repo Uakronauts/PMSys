@@ -1,0 +1,13 @@
+productName: PMSys
+executableName: PMSys
+appId: com.electron.PMSys
+extraResources: []
+asar: true
+
+win:
+  requestedExecutionLevel: asInvoker
+  publish: 
+    provider: github
+    owner: Uakronauts
+    repo: PMSys
+    token: YOUR_GITHUB_ACCESS_TOKEN_HERE
