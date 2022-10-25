@@ -1,4 +1,4 @@
-const {app, BrowserWindow, ipcMain, shell} = require('electron');
+const {app, BrowserWindow, ipcMain} = require('electron');
 const { autoUpdater } = require('electron-updater');
 
 let projTitle = 'Akronauts PMSys';
@@ -14,10 +14,11 @@ function createWindow() {
       contextIsolation: false,
       enableRemoteModule: true
     },
-    autoHideMenuBar: true,
+    autoHideMenuBar: true,      // console is CTRL+SHIFT+i, show menu is ALT
     title: projTitle
   })
   mainWindow.loadFile('src/GUI/index.html'),
+
   mainWindow.on('closed', function() {
     mainWindow = null;
   });
@@ -35,6 +36,7 @@ app.on('window-all-closed', () => {
   app.quit();
 });
 
+// Auto update
 ipcMain.on('app-version', (event) =>{ //reads app version specified in package.json and sends to main window
   event.sender.send('app-version', {version: app.getVersion() });
 });
