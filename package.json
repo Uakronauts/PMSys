@@ -28,23 +28,5 @@
   "bugs": {
     "url": "https://github.com/Uakronauts/PMSys/issues"
   },
-  "build": {
-    "productName": "PMSys",
-    "executableName": "PMSys",
-    "extraResources": [],
-    "appId": "com.electron.PMSys",
-    "asar": "true",
-    "win": {
-      "publish": [
-        {
-          "provider": "github",
-          "owner": "Uakronauts",
-          "repo": "PMSys",
-          "token": "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"
-        }
-      ],
-      "requestedExecutionLevel": "asInvoker"
-    }
-  },
   "homepage": "https://github.com/Uakronauts/PMSys#readme"
 }
