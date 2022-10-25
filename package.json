@@ -2,7 +2,7 @@
   "name": "pmsys",
   "version": "0.1.0",
   "description": "Project Management System (PMSys) for the University of Akron Akronauts Rocket Design Team",
-  "main": "src/index.js",
+  "main": "src/main.js",
   "scripts": {
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
