@@ -39,6 +39,9 @@ function parseQueryInput(rawText){
     //? If we want to change the delim option, do it here & above
     let queries = rawText.split(' ');
 
+    //check size of queries array to make sure we aren't wasting time
+    //doing future operations just for it to be empty
+
     // Warn on keyword detection
     queries.forEach(query => {
         let val = detectSqlKeywords(query);
@@ -74,6 +77,7 @@ function constructSqlQuery(queries){
         WHERE_CLAUSE = `${WHERE_CLAUSE} ${parseQuery(query)} AND`;
     });
     //remove last AND
+    //! fix this to use an indexOf AND, and check if it exists.
     WHERE_CLAUSE = WHERE_CLAUSE.substring(0, WHERE_CLAUSE.length - 4);
 }
 
