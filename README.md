@@ -2,7 +2,7 @@
 ### DBMS Final Project
 
 ## INSTRUCTIONS FOR USER INSTALLATION (Windows)
-1. Download the le-gui-Setup.exe file from the [most recent release](https://github.com/Uakronauts/PMSys/releases)'s installer package.
+1. Download the setup.exe file from the [most recent release](https://github.com/Uakronauts/PMSys/releases)'s installer package.
 2. Run the setup file. Your computer is going to give security warnings, just click the "run anyway" buttons until the application opens.
 
 ## EXTRA DEVELOPER INSTALLATION INSTRUCTIONS (Windows)
