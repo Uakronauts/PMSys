@@ -6,6 +6,9 @@
 ? Query Syntax is in a condition:value format.
 ? Queries will always SELECT the issueID
 
+SELECT issueID
+FROM issueList
+
 *WHERE*
 system/subsystem:{string} //? Only supports : //! This is the only one critical for midterm demo
 priority:{trivial,minor,major,critical} //? Will also support >, < etc
@@ -83,5 +86,5 @@ function constructSqlQuery(queries){
 
 function parseQuery(query){
     // : -> =
-    let temp = query.replace(':'/g,'=');
+    let temp = query.replace(/':'/g,'=');
 }
