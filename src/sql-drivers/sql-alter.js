@@ -8,6 +8,10 @@
 ? querying the database for the MAX value of ID and incrementing by
 ? one.
 
+! SAMPLE INPUT FOR MIDTERM DEMO
+depends on what db schema look like.
+
+
 remove is a right click issue & delete button
 update is a right click issue & edit button
 */
