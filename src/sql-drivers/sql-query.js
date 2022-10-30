@@ -26,20 +26,20 @@ priority (high to low/low to high)
 !SQL KEYWORDS ARE SENSITIVE!
 
 ! SAMPLE QUERIES FOR MIDTERM DEMO
-` system:'SSL'   subsystem:'Avionics' ` //? Shows nothing happens when system/subsys don't match
-
-`system:'ISL'`                          //? Print out all the content in a system
-
-`subsystem:'Avionics'`                  //? Show that a query for system AND subsystem returns the same
-and                                     //? Thing when they are both valid. (Avionics & ISL->Avionics are same)
-`system:ISL subsystem:'Avionics'`   
-
 `    `                                  //? Empty query to show entire database (SELECT * FROM table)
+
+` system='SSL' AND subsystem='Avionics' ` //? Shows nothing happens when system/subsys don't match
+
+`system='ISL' AND subsystem='Avionics'`       //? Show that a query for system AND subsystem returns the same
+and                                     //? Thing when they are both valid. (Avionics & ISL->Avionics are same)
+`subsystem='Avionics'`   
+
+`system='ISL'`                          //? Print out all the content in a system
 
 */
 // 
 
-var { detectSqlKeywords } = require('./sql-helpers');
+var { detectSqlKeywords, queryDatabase } = require('./sql-helpers');
 
 // Takes text from an input box and parses into separate queries
 // Separates by space (or empty space in the case of beginning/end)
@@ -65,6 +65,12 @@ function parseQueryInput(rawText){
 
     // Run (safe?) sql queries
     constructSqlQuery(rawText);
+
+    let res = queryDatabase(sql);
+    console.log(res);
+
+    //do element creation stuff with res
+    
 }
 
 // Construct a valid sql query from a list of queries
@@ -73,7 +79,7 @@ function constructSqlQuery(rawQuery){
     let SELECT_CLAUSE = '*'
 
     // FROM table
-    let FROM_CLAUSE = 'tableName'
+    let FROM_CLAUSE = 'tableName'   //TODO tablename
 
     // WHERE replace all spaces with AND clauses
     let WHERE_CLAUSE = rawQuery.replace(/ /g, ' AND ');
@@ -86,12 +92,7 @@ function constructSqlQuery(rawQuery){
     ${FROM_CLAUSE}
     ${WHERE_CLAUSE}
     `
-}
+    console.log(sql);
 
-// for midterm demo since we are only searching for things by subsys/sys,
-// just replace the : operator with the =
-function parseQuery(rawQuery){
-    let parsedQuery = rawQuery.replace(/:/g, '=');
-
-    return parsedQuery;
+    return sql;
 }

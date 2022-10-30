@@ -19,43 +19,45 @@ var detectSqlKeywords = function(query){
 
 // Take a comma delimited params list and stick it into the database
 var addToDatabase = function(params){
-    let conn = createConn();
-    let tableName = '';
+    let tableName = ''; //TODO tablename
 
     let sql = `INSERT INTO ${tableName} VALUES (${params})`;
 
+    let res = queryDatabase();
+
+    return;
+}
+
+var queryDatabase = function(sql){
+    let conn = createConn();
+    let res = null;
+
     conn.query(sql, function (err, result, fields) {
         if (err) throw err;
-        console.log("Values Added: ", result);
+        res = result;
     });
 
     conn.end();
+
+    return res;
 }
 
 var queryHighestID = function(){
-    let conn = createConn();
-    let tableName = '';
-    let highestID = -1;
+    let tableName = '';     //TODO tablename
 
     let sql = `
         SELECT MAX(ID)
         FROM ${tableName}
     `;
 
-    conn.query(sql, function (err, result, fields) {
-        if (err) throw err;
+    let res = queryDatabase(sql);
 
-        console.log("Query Results", result);
-        highestID = result[0].ID;
-    });
-
-    conn.end();
-
-    return highestID;
+    return res.ID;
 }
 
 module.exports = {
     detectSqlKeywords: detectSqlKeywords,
     addToDatabase: addToDatabase,
-    queryHighestID: queryHighestID
+    queryHighestID: queryHighestID,
+    queryDatabase: queryDatabase
 };
