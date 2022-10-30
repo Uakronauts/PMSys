@@ -4,20 +4,19 @@
 *SYNTAX*:
 
 ? Query Syntax is in a condition:value format.
-? Queries will always SELECT the issueID
 
-SELECT issueID
+SELECT *
 FROM issueList
 
 *WHERE*
 system/subsystem:{string} //? Only supports : //! This is the only one critical for midterm demo
-priority:{trivial,minor,major,critical} //? Will also support >, < etc
-type:{issue,improvement} //? Only supports :
+priority:{trivial,minor,major,critical} //? Will also support >, < etc //! Make this an ENUM type
 author:{string} //? Supports all equiv operators
 assignee:{string} //? Supports all equiv operators
 includes:{string} //? Only supports :
 is:{open/closed} //? Only supports :
 id:{num} //? Supports all equiv operators
+
 
 *ORDER BY*
 datetime (asc/desc)
@@ -25,6 +24,17 @@ author (alpha/rev alpha)
 priority (high to low/low to high)
 
 !SQL KEYWORDS ARE SENSITIVE!
+
+! SAMPLE QUERIES FOR MIDTERM DEMO
+` system:'SSL'   subsystem:'Avionics' ` //? Shows nothing happens when system/subsys don't match
+
+`system:'ISL'`                          //? Print out all the content in a system
+
+`subsystem:'Avionics'`                  //? Show that a query for system AND subsystem returns the same
+and                                     //? Thing when they are both valid. (Avionics & ISL->Avionics are same)
+`system:ISL subsystem:'Avionics'`   
+
+`    `                                  //? Empty query to show entire database (SELECT * FROM table)
 
 */
 // 
@@ -35,7 +45,10 @@ var { detectSqlKeywords } = require('./sql-helpers');
 // Separates by space (or empty space in the case of beginning/end)
 function parseQueryInput(rawText){
     // compresses multiple spaces to one space each
-    rawText.replace(/  +/g, ' ');
+    rawText = rawText.replace(/  +/g, ' ');
+    rawText = rawText.trim();
+
+    rawText = parseQuery(rawText);
 
     // check for individual queries where there is one space before & after
     // store those values in an array
@@ -51,26 +64,34 @@ function parseQueryInput(rawText){
     });
 
     // Run (safe?) sql queries
-    constructSqlQuery(queries);
+    constructSqlQuery(rawText);
 }
 
 // Construct a valid sql query from a list of queries
-function constructSqlQuery(queries){
-    // SELECT the issueID
+function constructSqlQuery(rawQuery){
+    // SELECT the everything needed to generate html content
+    let SELECT_CLAUSE = '*'
 
     // FROM table
+    let FROM_CLAUSE = 'tableName'
 
-    // WHERE (foreach queries->query, query AND query AND ...)
-    let WHERE_CLAUSE = "";
-    queries.forEach(query => {
-        WHERE_CLAUSE = `${WHERE_CLAUSE} ${parseQuery(query)} AND`;
-    });
-    //remove last AND
-    //! fix this to use an indexOf AND, and check if it exists.
-    WHERE_CLAUSE = WHERE_CLAUSE.substring(0, WHERE_CLAUSE.length - 4);
+    // WHERE replace all spaces with AND clauses
+    let WHERE_CLAUSE = rawQuery.replace(/ /g, ' AND ');
+
+    // in the future there can be sort by's added to this query via
+    // having dropdowns involved in the submission. for now, sorting
+    // will be in whichever way it comes out.
+    let sql = `
+    ${SELECT_CLAUSE}
+    ${FROM_CLAUSE}
+    ${WHERE_CLAUSE}
+    `
 }
 
-function parseQuery(query){
-    // : -> =
-    let temp = query.replace(/':'/g,'=');
+// for midterm demo since we are only searching for things by subsys/sys,
+// just replace the : operator with the =
+function parseQuery(rawQuery){
+    let parsedQuery = rawQuery.replace(/:/g, '=');
+
+    return parsedQuery;
 }

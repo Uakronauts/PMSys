@@ -16,7 +16,7 @@ var { detectSqlKeywords, addToDatabase, queryHighestID } = require('./sql-helper
 
 function parseAddInput(rawText){
     // remove all spaces from the given string.
-    rawText = rawText.replace(/s/g, '');
+    rawText = rawText.replace(/ /g, '');
     rawText = rawText + ',' + (queryHighestID() + 1);
 
     // split the rawText along a given delimiter (comma for now)
