@@ -12,11 +12,12 @@ remove is a right click issue & delete button
 update is a right click issue & edit button
 */
 
-var { detectSqlKeywords, addToDatabase } = require('./sql-helpers');
+var { detectSqlKeywords, addToDatabase, queryHighestID } = require('./sql-helpers');
 
 function parseAddInput(rawText){
     // remove all spaces from the given string.
     rawText = rawText.replace(/s/g, '');
+    rawText = rawText + ',' + (queryHighestID() + 1);
 
     // split the rawText along a given delimiter (comma for now)
     // this will give us all our different parameters for the add function.
@@ -32,3 +33,4 @@ function parseAddInput(rawText){
     // stick the comma delimited raw text into the add function.
     addToDatabase(rawText);
 }
+

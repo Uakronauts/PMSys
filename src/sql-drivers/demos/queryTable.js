@@ -2,16 +2,16 @@ var { createConn } = require('../sql-connection');
 
 let conn = createConn('testDB');
 
-let sql = `
-SELECT name
-FROM testtable
-WHERE id > 1
-`
+// let sql = `
+// SELECT name
+// FROM testtable
+// WHERE id > 1
+// `
 
-conn.query(sql, function (err, result, fields) {
-    if (err) throw err;
-    console.log("Value Created", result);
-  });
+// conn.query(sql, function (err, result, fields) {
+//     if (err) throw err;
+//     console.log("Value Created", result);
+//   });
 
 
 sql = `
@@ -22,7 +22,9 @@ ORDER BY name ASC
 
 conn.query(sql, function (err, result, fields) {
     if (err) throw err;
-    console.log("Value Created", result);
+    console.log("Values Obtained", result);
+
+    console.log(result[0]);
   });
 
  conn.end();

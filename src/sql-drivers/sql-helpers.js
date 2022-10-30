@@ -32,7 +32,30 @@ var addToDatabase = function(params){
     conn.end();
 }
 
+var queryHighestID = function(){
+    let conn = createConn();
+    let tableName = '';
+    let highestID = -1;
+
+    let sql = `
+        SELECT MAX(ID)
+        FROM ${tableName}
+    `;
+
+    conn.query(sql, function (err, result, fields) {
+        if (err) throw err;
+
+        console.log("Query Results", result);
+        highestID = result[0].ID;
+    });
+
+    conn.end();
+
+    return highestID;
+}
+
 module.exports = {
     detectSqlKeywords: detectSqlKeywords,
-    addToDatabase: addToDatabase
+    addToDatabase: addToDatabase,
+    queryHighestID: queryHighestID
 };
