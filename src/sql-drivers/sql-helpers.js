@@ -28,6 +28,7 @@ var addToDatabase = function(params){
     return;
 }
 
+// Query the PMSys database with some given sql query
 var queryDatabase = function(sql){
     let conn = createConn();
     let res = null;
@@ -42,6 +43,7 @@ var queryDatabase = function(sql){
     return res;
 }
 
+// Query the PMSys database for the highest ID
 var queryHighestID = function(){
     let tableName = '';     //TODO tablename
 
@@ -55,9 +57,35 @@ var queryHighestID = function(){
     return res.ID;
 }
 
+// Converts the result of a sql query into text
+// res should be in the form of an array of RowDataPackets
+var resToText = function(res){
+    let ret = '';
+    res.forEach(RDP => {
+        ret += `${RDPToText(RDP)}`;
+    });
+
+    return ret;
+}
+
+// Converts a single RowDataPacket into readable text and returns the formatted text
+var RDPToText = function(RowDataPacket){
+    let ret = '';
+    Object.entries(RowDataPacket).forEach(entry => {
+        const [key, value] = entry;
+        ret += `${key}:${value} `
+    })
+    ret += '\n';
+
+    return ret;
+}
+
 module.exports = {
     detectSqlKeywords: detectSqlKeywords,
     addToDatabase: addToDatabase,
     queryHighestID: queryHighestID,
-    queryDatabase: queryDatabase
+    queryDatabase: queryDatabase,
+
+    resToText: resToText,
+    RDPToText: RDPToText
 };
