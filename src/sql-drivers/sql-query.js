@@ -29,7 +29,7 @@ priority (high to low/low to high)
 */
 // 
 
-const { sqlKeywords } = require('../globals/globals');
+var { detectSqlKeywords } = require('./sql-helpers');
 
 // Takes text from an input box and parses into separate queries
 // Separates by space (or empty space in the case of beginning/end)
@@ -52,20 +52,6 @@ function parseQueryInput(rawText){
 
     // Run (safe?) sql queries
     constructSqlQuery(queries);
-}
-
-// Search each query for each keyword and warn when applicable
-//? Return true when keyword is detected, false if undetected
-function detectSqlKeywords(query){
-    sqlKeywords.forEach(keyword => {
-        // If the query contains the sqlkeyword
-        if(query.toUpperCase().contains(keyword))
-        {
-            console.warn(`${query} contains ${keyword}`);
-            return true;
-        }
-    });
-    return false;
 }
 
 // Construct a valid sql query from a list of queries
