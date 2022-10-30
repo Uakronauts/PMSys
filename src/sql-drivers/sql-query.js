@@ -58,7 +58,9 @@ function parseQueryInput(rawText){
     //check size of queries array to make sure we aren't wasting time
     //doing future operations just for it to be empty
 
-    // Warn on keyword detection
+    // Warn on keyword detection.
+    // Needs to be split to ignore improper queries.
+    //! Will handle later for final pres
     queries.forEach(query => {
         let val = detectSqlKeywords(query);
     });
@@ -70,7 +72,7 @@ function parseQueryInput(rawText){
     console.log(res);
 
     //do element creation stuff with res
-    
+
 }
 
 // Construct a valid sql query from a list of queries
