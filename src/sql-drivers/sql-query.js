@@ -43,12 +43,10 @@ var { detectSqlKeywords, queryDatabase } = require('./sql-helpers');
 
 // Takes text from an input box and parses into separate queries
 // Separates by space (or empty space in the case of beginning/end)
-function parseQueryInput(rawText){
+var parseQueryInput = function(rawText){
     // compresses multiple spaces to one space each
     rawText = rawText.replace(/  +/g, ' ');
     rawText = rawText.trim();
-
-    rawText = parseQuery(rawText);
 
     // check for individual queries where there is one space before & after
     // store those values in an array
@@ -61,18 +59,16 @@ function parseQueryInput(rawText){
     // Warn on keyword detection.
     // Needs to be split to ignore improper queries.
     //! Will handle later for final pres
+    
     queries.forEach(query => {
         let val = detectSqlKeywords(query);
     });
 
     // Run (safe?) sql queries
-    constructSqlQuery(rawText);
+    let sql = constructSqlQuery(rawText);
+    let res = queryDatabase(sql)
 
-    let res = queryDatabase(sql);
-    console.log(res);
-
-    //do element creation stuff with res
-
+    return res;
 }
 
 // Construct a valid sql query from a list of queries
@@ -81,7 +77,7 @@ function constructSqlQuery(rawQuery){
     let SELECT_CLAUSE = '*'
 
     // FROM table
-    let FROM_CLAUSE = 'tableName'   //TODO tablename
+    let FROM_CLAUSE = 'datatable'   //TODO tablename
 
     // WHERE replace all spaces with AND clauses
     let WHERE_CLAUSE = rawQuery.replace(/ /g, ' AND ');
@@ -89,12 +85,26 @@ function constructSqlQuery(rawQuery){
     // in the future there can be sort by's added to this query via
     // having dropdowns involved in the submission. for now, sorting
     // will be in whichever way it comes out.
-    let sql = `
-    ${SELECT_CLAUSE}
-    ${FROM_CLAUSE}
-    ${WHERE_CLAUSE}
-    `
-    console.log(sql);
+    let sql = ''
+    
+    if(WHERE_CLAUSE === '')
+    {
+        sql = `
+        SELECT ${SELECT_CLAUSE}
+        FROM ${FROM_CLAUSE}
+        `
+    }
+    else{
+        sql = `
+        SELECT ${SELECT_CLAUSE}
+        FROM ${FROM_CLAUSE}
+        WHERE ${WHERE_CLAUSE}
+        `
+    }
 
     return sql;
+}
+
+module.exports = {
+    parseQueryInput: parseQueryInput
 }

@@ -1,12 +1,13 @@
 var { createConn } = require('../sql-connection');
+const { RDPToText, resToText } = require('../sql-helpers');
 
 let conn = createConn('testDB');
 
-// let sql = `
-// SELECT name
-// FROM testtable
-// WHERE id > 1
-// `
+let sql = `
+SELECT *
+FROM testtable
+WHERE id > 1
+`
 
 // conn.query(sql, function (err, result, fields) {
 //     if (err) throw err;
@@ -14,17 +15,17 @@ let conn = createConn('testDB');
 //   });
 
 
-sql = `
-SELECT *
-FROM testtable
-ORDER BY name ASC
-`
+// sql = `
+// SELECT *
+// FROM testtable
+// ORDER BY name ASC
+// `
 
 conn.query(sql, function (err, result, fields) {
     if (err) throw err;
     console.log("Values Obtained", result);
 
-    console.log(result[0]);
+    console.log(resToText(result));
   });
 
  conn.end();

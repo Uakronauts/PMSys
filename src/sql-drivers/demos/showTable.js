@@ -1,10 +1,10 @@
 var { createConn } = require('../sql-connection');
 
-let conn = createConn('testDB');
+let conn = createConn();
 
 let sql = `
 SELECT *
-FROM testTable
+FROM datatable
 `
 conn.query(sql, function (err, result, fields) {
     if (err) throw err;

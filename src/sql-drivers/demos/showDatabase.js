@@ -1,6 +1,6 @@
 var { createConn } = require('../sql-connection');
 
-let conn = createConn('testDB');
+let conn = createConn();
 
 let sql = `
 SHOW FULL TABLES
