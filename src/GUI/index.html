@@ -8,6 +8,79 @@
 <body>
 
 
+<h1>UAKRONAUTS Rocket Design Team </h1>
+<h2>Projects, Tasks, and Issues</h2>
+
+<script language="Javascript" >
+    function download() {
+      var filename = window.document.myform.docname.value;
+      var sDate =  window.document.myform.sDate.value;
+      var projName = window.document.myform.projName.value;
+      var numDays =  window.document.myform.numDays.value;
+
+      let str = filename + sDate + projName + numDays; 
+      console.log (str);  
+      
+      var pom = document.createElement('a');
+      pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + 
+        "Start Date: " + encodeURIComponent(sDate) + "\n\n" +
+        "Number of Days: " + encodeURIComponent(numDays) + "\n\n" +
+        "Project Name: " + encodeURIComponent(projName) + "\n\n" +
+        encodeURIComponent(text)); 
+    
+      pom.setAttribute('download', filename);
+    
+      pom.style.display = 'none';
+      document.body.appendChild(pom);
+    
+      pom.click();
+    
+      document.body.removeChild(pom);
+    }
+    </script>
+    </head>
+    <body>
+    <form name="myform" method="post" >
+
+      <label for="text">Text File Name:</label>
+      <input type="text" id="docname" value="data.txt" /> <br> <br>
+       
+      <label for="sDate">Start Date:</label>
+      <input type="date" id="sDate" name="sDate" /> <br> <br>
+      
+      <label for="numDays">Number of Days:</label> 
+      <input type="number" id="numDays" name="numDays"/> <br> <br> 
+      
+      <label for="projName">Project Name:</label>
+      <input type="text" id="projName" name="projName" /> <br> <br> 
+       
+
+      <div style="display:unblock">
+       
+      </div>
+      <textarea rows=3 cols=50 id="text" />When you click the Submit button, the contents of this submission will be downloaded to your machine. </textarea>
+      
+      <input id="download_btn" type="submit" class="btn" style="width: 125px" onClick="download();" />
+      
+    </form>
+    </body>
+    </html>
+
+<!-- Edit/Update Function
+command.CommandText = "UPDATE Table
+SET ID = @id Where System = @sys, Subsystem = @subsys, Name = @name, Description = @desc, Start Date = @sDate, and Number of Days = @numDays;
+[10:46 AM]
+command.Parameters.AddWithValue("@sys", system);
+command.Parameters.AddWithValue("@subSys", subSystem);
+command.Parameters.AddWithValue("@name", name);
+command.Parameters.AddWithValue("@desc", description);
+command.Parameters.AddWithValue("@sDate", startDate);
+command.Parameters.AddWithValue("@numDays", numberOfDays);
+[10:46 AM]
+
+-->
+
+
 
 <div id="sql-content">
 
