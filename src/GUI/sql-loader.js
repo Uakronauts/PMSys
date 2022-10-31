@@ -6,16 +6,16 @@ var { parseQueryInput } = require("../sql-drivers/sql-query");
 
 // Generate content inside the div using a query result as an argument.
 // Result should be an array of RowDataPacket objects
-var generateContent = async function(){
+var generateContent = async function(query = ""){
     var contentDiv = document.getElementById('sql-content');
-    var res = await parseQueryInput("");
+    var res = await parseQueryInput(query);
 
     clearContent(contentDiv);
 
     if(res !== null && res !== undefined){
         
         let arr = resToText(res).split("\n");
-        console.log(arr);
+        //console.log(arr);
 
         for(let i = 0; i < arr.length; ++i)
         {

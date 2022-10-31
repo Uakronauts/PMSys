@@ -74,7 +74,7 @@ var parseQueryInput = function(rawText){
 // Construct a valid sql query from a list of queries
 function constructSqlQuery(rawQuery){
     // SELECT the everything needed to generate html content
-    let SELECT_CLAUSE = '*'
+    let SELECT_CLAUSE = 'title, syslab, subsystem, id'
 
     // FROM table
     let FROM_CLAUSE = 'datatable'   //TODO tablename

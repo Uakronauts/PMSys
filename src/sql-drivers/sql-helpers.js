@@ -47,7 +47,7 @@ var queryDatabase = async function(sql){
     {
         conn.end();
 
-        console.log(val);
+        //console.log(val);
         return val;
     });   
 

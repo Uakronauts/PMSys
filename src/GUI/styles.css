@@ -3,6 +3,10 @@
     --font: Arial;
   }
 
+body{
+  background-color: white;
+}
+
 /* AUTO UPDATER */
 #notification {
     position: fixed;
