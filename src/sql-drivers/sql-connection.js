@@ -11,7 +11,7 @@ FLUSH PRIVILEGES;
 var mysql = require('mysql');
 
 // Create a connection to a given database (default to PMSys DB)
-var createConn = function(dbName = 'PMSys')
+var createConn = function(dbName = 'PMSys_Beta')
 {
     let conn = mysql.createConnection({
         host: "localhost",

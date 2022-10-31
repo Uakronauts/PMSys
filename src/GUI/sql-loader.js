@@ -11,7 +11,6 @@ var generateContent = async function(){
     var res = await parseQueryInput("");
 
     clearContent(contentDiv);
-    
 
     if(res !== null && res !== undefined){
         
@@ -33,8 +32,6 @@ var generateContent = async function(){
         contentDiv.append(p);
     }
     
-    
-
     return;
 }
 

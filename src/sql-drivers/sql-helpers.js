@@ -22,7 +22,7 @@ var detectSqlKeywords = async function(query){
 
 // Take a comma delimited params list and stick it into the database
 var addToDatabase = async function(params){
-    let tableName = ''; //TODO tablename
+    let tableName = 'datatable'; //TODO tablename
 
     let sql = `INSERT INTO ${tableName} VALUES (${params})`;
 
@@ -33,7 +33,7 @@ var addToDatabase = async function(params){
 
 // Query the PMSys database with some given sql query
 var queryDatabase = async function(sql){
-    let conn = createConn("testDB");
+    let conn = createConn();
 
     var queryPromise = new Promise((resolve, reject) => {
         conn.query(sql, function (err, result, fields) {
@@ -56,7 +56,7 @@ var queryDatabase = async function(sql){
 
 // Query the PMSys database for the highest ID
 var queryHighestID = async function(){
-    let tableName = '';     //TODO tablename
+    let tableName = 'datatable';     //TODO tablename
 
     let sql = `
         SELECT MAX(ID)

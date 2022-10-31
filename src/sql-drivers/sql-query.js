@@ -77,7 +77,7 @@ function constructSqlQuery(rawQuery){
     let SELECT_CLAUSE = '*'
 
     // FROM table
-    let FROM_CLAUSE = 'testtable'   //TODO tablename
+    let FROM_CLAUSE = 'datatable'   //TODO tablename
 
     // WHERE replace all spaces with AND clauses
     let WHERE_CLAUSE = rawQuery.replace(/ /g, ' AND ');
