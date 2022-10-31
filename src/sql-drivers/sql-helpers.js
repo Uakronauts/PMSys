@@ -5,46 +5,57 @@ const { sqlKeywords } = require('../globals/globals');
 
 // Search each query for each keyword and warn when applicable
 //? Return true when keyword is detected, false if undetected
-var detectSqlKeywords = function(query){
-    sqlKeywords.forEach(keyword => {
-        // If the query contains the sqlkeyword
-        if(query.toUpperCase().contains(keyword))
-        {
-            console.warn(`${query} contains ${keyword}`);
-            return true;
-        }
-    });
+var detectSqlKeywords = async function(query){
+    if(query !== null)
+    {
+        sqlKeywords.forEach(keyword => {
+            // If the query contains the sqlkeyword
+            if((query.toUpperCase()).includes(keyword))
+            {
+                console.warn(`${query} contains ${keyword}`);
+                return true;
+            }
+        });
+    }
     return false;
 }
 
 // Take a comma delimited params list and stick it into the database
-var addToDatabase = function(params){
+var addToDatabase = async function(params){
     let tableName = ''; //TODO tablename
 
     let sql = `INSERT INTO ${tableName} VALUES (${params})`;
 
-    let res = queryDatabase();
+    let res = await queryDatabase();
 
     return;
 }
 
 // Query the PMSys database with some given sql query
-var queryDatabase = function(sql){
-    let conn = createConn();
-    let res = null;
+var queryDatabase = async function(sql){
+    let conn = createConn("testDB");
 
-    conn.query(sql, function (err, result, fields) {
-        if (err) throw err;
-        res = result;
+    var queryPromise = new Promise((resolve, reject) => {
+        conn.query(sql, function (err, result, fields) {
+            if (err) throw err;
+    
+            resolve(result);
+        });
     });
 
-    conn.end();
+    const newVal = queryPromise.then(async (val) =>
+    {
+        conn.end();
 
-    return res;
+        console.log(val);
+        return val;
+    });   
+
+    return await newVal;
 }
 
 // Query the PMSys database for the highest ID
-var queryHighestID = function(){
+var queryHighestID = async function(){
     let tableName = '';     //TODO tablename
 
     let sql = `
@@ -52,7 +63,7 @@ var queryHighestID = function(){
         FROM ${tableName}
     `;
 
-    let res = queryDatabase(sql);
+    let res = await queryDatabase(sql);
 
     return res.ID;
 }
