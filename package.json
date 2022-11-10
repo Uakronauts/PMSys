@@ -19,6 +19,7 @@
     "electron-builder": "^22.13.1"
   },
   "dependencies": {
+    "bootstrap": "^5.2.2",
     "electron-updater": "^4.3.9",
     "mysql": "^2.18.1",
     "plotly.js-dist-min": "^2.6.1"
