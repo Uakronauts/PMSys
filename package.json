@@ -21,8 +21,7 @@
   "dependencies": {
     "bootstrap": "^5.2.2",
     "electron-updater": "^4.3.9",
-    "mysql": "^2.18.1",
-    "plotly.js-dist-min": "^2.6.1"
+    "mysql": "^2.18.1"
   },
   "author": "Aaron Hoffman & Jenice Mario",
   "license": "ISC",
