@@ -1,5 +1,5 @@
-const { queryDatabase } = require("../sql-drivers/sql-helpers");
-const { generateContent } = require("./sql-loader");
+const { queryDatabase } = require("../../sql-drivers/sql-helpers");
+const { generateContent } = require("./../sql-loader");
 
 generateContent();
 

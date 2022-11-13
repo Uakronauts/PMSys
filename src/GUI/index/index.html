@@ -3,14 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="index.css">
 
+    <script src="../../../node_modules/jquery/dist/jquery.min.js"></script>
+    <script> window.jQuery = window.$ = require('jquery'); //fixes bootstrap???? </script>
+    <script src="../../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
 
 <body>
 
+    <div class="header-row row">
+        <div class="col-sm-1">
+            <div class="dropdown">
+                <button id="systemDrp" class="btn dropdown-toggle btnDropdown"
+                    type="button" data-toggle="dropdown"><strong>⚗️System</strong>
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <!-- This is loaded dynamically from the database (all system names) -->
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-sm-1 breathe-left">
+            <div class="dropdown">
+                <button id="subsysDrp" class="btn dropdown-toggle btnDropdown"
+                    type="button" data-toggle="dropdown"><strong>⚒️Subsystem</strong>
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <!-- This is loaded dynamically from the database (all subsystem names) -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
     <!-- Auto Updater -->
     <div class="version">
-        <p id="version"></p>
+        <strong id="version"></strong>
     </div>
 
     <div id="notification" class="alert alert-info
@@ -23,7 +52,6 @@
     <!-- End of Auto Updater -->
 
 </body>
-
-<script src="./index.js"></script>
-<script src="../../auto-updater/updater.js"></script>
+    <script src="./index.js"></script>
+    <script src="../../auto-updater/updater.js"></script>
 </html>
