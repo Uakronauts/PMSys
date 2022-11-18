@@ -1,61 +1,70 @@
-const { queryDatabase } = require("../../sql-drivers/sql-helpers");
-const { generateContent } = require("./../sql-loader");
 
-generateContent();
+const remote = require('electron').remote;  // For using electron modules remotely (?)
+const BrowserWindow = remote.BrowserWindow; // For launching an external window
 
-/*
-CREATE TABLE DataTable
-(
-    id INT,
-    
-    title VARCHAR(64),
-    description VARCHAR(512),
-    
-    syslab VARCHAR(16),
-    subsystem VARCHAR(16),
+window.onload = loadDropdownContent;
 
-    startdate DATE,
-    numdays INT, CHECK(numdays > 0),
+//* LOAD THE DROPDOWN CONTENT (FOR SYSTEM/SUBSYSTEM) ON LOAD *\\
+// ---------------------------------------------------------- \\
+function loadDropdownContent(){
+    // query the database for all systems and subsystems
+    loadSystemContent();
+    loadSubsystemContent();
 
 
-    PRIMARY KEY(id)
-);
-*/
 
-function addToDB(e) {
-    e.preventDefault();
+}
 
-    var projID = window.document.myform.projID.value;
-    var projName = window.document.myform.docname.value;
-    var projDesc = window.document.myform.projDesc.value;
-    var sysLab = window.document.myform.syslab.value;
-    var subsys = window.document.myform.subsys.value;
-    var sDate =  window.document.myform.sDate.value;
-    var numDays =  window.document.myform.numDays.value;
+function loadSystemContent(condition = "*"){
+    let systemDropdown = document.getElementById('sysDrpContent');
 
-    let dataStr = `${projID},'${projName}','${projDesc}','${sysLab}','${subsys}','${sDate}',${numDays}`; 
-    let tempStr = 'id,title,description,syslab,subsystem,startdate,numdays';
+    //load the content from the system database
+    let content = getTableContent("System", condition);
 
-    let sql = `INSERT INTO DataTable(${tempStr})
-               VALUES (${dataStr});`;
 
-    console.log(sql);
+}
 
-    queryDatabase(sql);
-    
-    // var pom = document.createElement('a');
-    // pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + 
-    //   "Start Date: " + encodeURIComponent(sDate) + "\n\n" +
-    //   "Number of Days: " + encodeURIComponent(numDays) + "\n\n" +
-    //   "Project Name: " + encodeURIComponent(projName) + "\n\n" +
-    //   encodeURIComponent(text)); 
-  
-    // pom.setAttribute('download', filename);
-  
-    // pom.style.display = 'none';
-    // document.body.appendChild(pom);
-  
-    // pom.click();
-  
-    // document.body.removeChild(pom);
-  }
+function loadSubsystemContent(condition = "*"){
+    let systemDropdown = document.getElementById('subsysDrpContent');
+
+    //load the content from the subsystem database
+    let content = getTableContent("Subsystem", condition);
+
+}
+
+
+
+
+// ---------------------------------------------------------- \\
+
+
+
+//* OPEN A NEW PAGE WHEN THE ADD BUTTON IS CLICKED *\\
+// ------------------------------------------------- \\
+let addButton = document.getElementById('addIssue');
+addButton.addEventListener('click', function(){
+    launchNewPage();
+});
+
+function launchNewPage(){
+    let newWindowHTML = `${process.cwd()}/src/GUI/newMenu/newMenu.html`;
+    let newWindowICON = `${process.cwd()}/resources/icons/newIssue.ico`;
+
+    // Set up and launch Secondary Window (s e p a r a t e l y) (we love social distancing)
+    const NewWindow = new BrowserWindow({
+            width: 1200,
+            height: 700,
+            webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false,
+            enableRemoteModule: true
+        },
+        icon: newWindowICON,
+        autoHideMenuBar: true,
+        title: "Add a new issue."
+    })
+
+    NewWindow.loadFile(newWindowHTML);
+}
+
+// ------------------------------------------------- \\
