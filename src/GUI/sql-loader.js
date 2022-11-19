@@ -3,7 +3,7 @@
 const { queryDatabase } = require("../sql-drivers/sql-helpers")
 
 // Generate content inside the div using a query result as an argument.
-// Result should be an array of RowDataPacket objects
+// Result is an array of RowDataPacket objects
 async function getTableContent(table, condition = "*"){
     //create a connection & query a database
     let sql = '';
@@ -25,9 +25,7 @@ async function getTableContent(table, condition = "*"){
         `
     }
 
-
     let data = await queryDatabase(sql);
-    console.log(data);
     return data;
 }
 

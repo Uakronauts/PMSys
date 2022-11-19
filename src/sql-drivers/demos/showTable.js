@@ -4,7 +4,7 @@ let conn = createConn();
 
 let sql = `
 SELECT *
-FROM TaskTable
+FROM SubsystemsTable
 `
 conn.query(sql, function (err, result, fields) {
     if (err) throw err;

@@ -3,30 +3,9 @@ var { createConn } = require('../sql-connection');
 let conn = createConn();
 
 var table = null;
-// `
-// CREATE TABLE SubsystemChildProjects
-// (
-//     parentSubsystemName VARCHAR(64) NOT NULL,
-//     childProjectID INT NOT NULL,
-
-//     FOREIGN KEY (parentSubsystemName) REFERENCES Subsystems(Name),
-//     FOREIGN KEY (childProjectID) REFERENCES ProjectTable(ProjectID)
-// );
-`
 
 // `
-// CREATE TABLE SystemChildren
-// (
-//     parentSystemName VARCHAR(64) NOT NULL,
-//     childSubsystemName VARCHAR(64) UNIQUE NOT NULL,
-
-//     FOREIGN KEY (parentSystemName) REFERENCES Systems(Name),
-//     FOREIGN KEY (childSubsystemName) REFERENCES Subsystems(Name)
-// );
-// `
-
-// `
-// CREATE TABLE Systems
+// CREATE TABLE SystemsTable
 // (
 //     Name VARCHAR(64),
 //     Description VARCHAR(512),
@@ -36,24 +15,43 @@ var table = null;
 // `
 
 // `
-// CREATE TABLE Subsystems
+// CREATE TABLE SubsystemsTable
 // (
 //     Name VARCHAR(64),
 //     Description VARCHAR(512),
 
+//     ParentSys VARCHAR(64),
+//     FOREIGN KEY (ParentSys) REFERENCES SystemsTable(Name),
+
 //     PRIMARY KEY (Name)
-// );
-// `
+// );`
 
-// `CREATE TABLE ProjectChildren
+// `CREATE TABLE DataTable
 // (
-//     parentProjectID INT NOT NULL, 
-//     childTaskID INT NOT NULL UNIQUE,
+//     ID INT,
+//     IssueType VARCHAR(64),
 
-//     FOREIGN KEY (parentProjectID) REFERENCES ProjectTable(ProjectID),
-//     FOREIGN KEY (childTaskID) REFERENCES TaskTable(TaskID)
+//     Title VARCHAR(64),
+//     Description VARCHAR(512),
+
+//     StartDate DATE,
+//     NumDays INT,
+
+//     PercentCompleted INT NOT NULL,
+
+//     Assignee VARCHAR(64),
+//     ParentSubsys VARCHAR(64),
+
+//     FOREIGN KEY (ParentSubsys) REFERENCES SubsystemsTable(Name),
+
+//     CHECK (NumDays >= 0),
+//     CHECK (PercentCompleted >= 0 AND PercentCompleted <= 100),
+
+//     PRIMARY KEY (ID)
 // );
-// `
+// `;
+
+
 
 // `CREATE TABLE ProjectTable
 // (
