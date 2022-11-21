@@ -2,6 +2,8 @@
 const remote = require('electron').remote;  // For using electron modules remotely (?)
 const BrowserWindow = remote.BrowserWindow; // For launching an external window
 
+const { getTableContent, populateDropdown } = require("../sql-loader");
+
 window.onload = loadDropdownContent;
 
 //* LOAD THE DROPDOWN CONTENT (FOR SYSTEM/SUBSYSTEM) ON LOAD *\\
@@ -15,21 +17,33 @@ function loadDropdownContent(){
 
 }
 
-function loadSystemContent(condition = "*"){
+async function loadSystemContent(){
     let systemDropdown = document.getElementById('sysDrpContent');
 
     //load the content from the system database
-    let content = getTableContent("System", condition);
+    let content = await getTableContent("SystemsTable");
 
-
+    // convert the array into <li> elements and place within the dropdown
+    populateDropdown(systemDropdown, content);
 }
 
-function loadSubsystemContent(condition = "*"){
-    let systemDropdown = document.getElementById('subsysDrpContent');
+async function loadSubsystemContent(parentSys = "*"){
+    let subsystemDropdown = document.getElementById('subsysDrpContent');
 
-    //load the content from the subsystem database
-    let content = getTableContent("Subsystem", condition);
+    //?condition should be like:
+    // condition = 'ISL'; or condition = 'PSL'
+    // which would return all systems under ISL/PSL umbrella respectively
+    let query = parentSys;
+    if(query !== "*")
+    {
+        query = `SubsystemsTable.ParentSys = '${parentSys}'`
+    }
 
+    // load the content from the subsystem database
+    let content = await getTableContent("SubsystemsTable", query);
+
+    // convert the array into <li> elements and place within the dropdown
+    populateDropdown(subsystemDropdown, content);
 }
 
 
