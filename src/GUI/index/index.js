@@ -40,10 +40,10 @@ async function loadSubsystemContent(parentSys = "*"){
     }
 
     // load the content from the subsystem database
-    let content = await getTableContent("SubsystemsTable", query);
+    let content = await getTableContent("SubsystemsTable", query, "ParentSys DESC");
 
     // convert the array into <li> elements and place within the dropdown
-    populateDropdown(subsystemDropdown, content);
+    populateDropdown(subsystemDropdown, content, "ParentSys");
 }
 
 
