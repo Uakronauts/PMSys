@@ -5,13 +5,15 @@ const { queryDatabase } = require("../sql-drivers/sql-helpers")
 // Generate content inside the div using a query result as an argument.
 // Result is an array of RowDataPacket objects
 var getTableContent = async function(table, condition = "*"){
-    //create a connection & query a database
+    // create a connection & query a database
+    // needs to select all for System and Subsystem tables because
+    // we need to see if the content has a ParentSys attribute
     let sql = '';
     if(condition === '*')
     {
         sql = 
         `
-        SELECT Name
+        SELECT *
         FROM ${table}
         `
     }
@@ -19,7 +21,7 @@ var getTableContent = async function(table, condition = "*"){
     {
         sql = 
         `
-        SELECT Name
+        SELECT *
         FROM ${table}
         WHERE ${condition}
         `
@@ -45,11 +47,26 @@ var populateDropdown = function(dropdownElem, elems)
 
         liElem.appendChild(aElem);
 
-        // Add an event listener that waits for a click to create a reaction event
-        // for querying the database
-        liElem.addEventListener('click', function(){
-            console.log(`${this.innerText} <- THIS IS ME!`)
-        })
+        if(dataRow["ParentSys"] === undefined)
+        {
+            // Add an event listener that waits for a click to create a reaction event
+            // for querying the database. This is for SYSTEMS table (should not modify)
+            // subsystems dropdown, but should still add.modify a query element
+            liElem.addEventListener('click', function(){
+                console.log(`${this.innerText} <- THIS SYSTEM IS ME!`)
+            })
+        }
+        else //ParentSys is undefined (subsystem)
+        {
+            // Add an event listener that waits for a click to create a reaction event
+            // for querying the database. This is for SUBSYSTEMS table, which should
+            // auto select the appropriate parent system from the systems dropdown by
+            // finding and "clicking" the appropriate li element
+            liElem.addEventListener('click', function(){
+                console.log(`${this.innerText} <- THIS SUBSYSTEM IS ME!`)
+            })
+        }
+
 
         dropdownElem.appendChild(liElem);
     });

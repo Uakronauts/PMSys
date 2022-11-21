@@ -12,55 +12,64 @@
 
 <body>
 
-    <div class="header-row row">
-        <div class="col-sm-1 breathe-top">
-            <!-- System Dropdown -->
-            <div class="dropdown">
-                <button id="systemDrp" class="btn dropdown-toggle btnDropdown"
-                    type="button" data-toggle="dropdown"><strong>⚗️System</strong>
-                <span class="caret"></span></button>
-                <ul id="sysDrpContent" class="dropdown-menu">
-                    <!-- This is loaded dynamically from the database (all system names) -->
-                </ul>
+    <!-- Top Menu Section -->
+    <section> 
+        <div class="header-row row">
+            <div class="col-sm-1 breathe-top">
+                <!-- System Dropdown -->
+                <div class="dropdown">
+                    <button id="systemDrp" class="btn dropdown-toggle btnDropdown"
+                        type="button" data-toggle="dropdown"><strong>⚗️System</strong>
+                    <span class="caret"></span></button>
+                    <ul id="sysDrpContent" class="dropdown-menu">
+                        <!-- This is loaded dynamically from the database (all system names) -->
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-sm-1 breathe-left breathe-top">
+                <!-- Subsystem Dropdown -->
+                <div id="subsysDrpDiv" class="dropdown">
+                    <button id="subsysDrp" class="btn dropdown-toggle btnDropdown"
+                        type="button" data-toggle="dropdown"><strong>⚒️Subsystem</strong>
+                    <span class="caret"></span></button>
+                    <ul id="subsysDrpContent" class="dropdown-menu">
+                        <!-- This is loaded dynamically from the database (all subsystem names) -->
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-sm-4 bigbreathe-left">
+                <!-- Textbox for query input -->
+                <input class="form-control input-lg darkInput" id="inputlg" type="text"
+                        placeholder="🔎︎ search using custom filters">
+            </div>
+
+            <div class="col-sm-1 breathe-top">
+                <!-- Order by Dropdown -->
+                <div class="dropdown">
+                    <button id="sortDrp" class="btn dropdown-toggle btnDropdown"
+                        type="button" data-toggle="dropdown"><strong>Order By</strong>
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <!-- This is loaded dynamically from the database (all subsystem names) -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Opens the add window -->
+            <div class="col-sm-1 bigbreathe-left breathe-top">
+                <button id="addIssue" class="btn btnAdd" type="button"><strong>NEW 🚀</strong></button>
             </div>
         </div>
+    </section>
 
-        <div class="col-sm-1 breathe-left breathe-top">
-            <!-- Subsystem Dropdown -->
-            <div id="subsysDrpDiv" class="dropdown">
-                <button id="subsysDrp" class="btn dropdown-toggle btnDropdown"
-                    type="button" data-toggle="dropdown"><strong>⚒️Subsystem</strong>
-                <span class="caret"></span></button>
-                <ul id="subsysDrpContent" class="dropdown-menu">
-                    <!-- This is loaded dynamically from the database (all subsystem names) -->
-                </ul>
-            </div>
+    <!-- Query Details Section -->
+    <section>
+        <div class="row">
+
         </div>
-
-        <div class="col-sm-4 bigbreathe-left">
-            <!-- Textbox for query input -->
-            <input class="form-control input-lg darkInput" id="inputlg" type="text"
-                    placeholder="🔎︎ search using custom filters">
-        </div>
-
-        <div class="col-sm-1 breathe-top">
-            <!-- Order by Dropdown -->
-            <div class="dropdown">
-                <button id="sortDrp" class="btn dropdown-toggle btnDropdown"
-                    type="button" data-toggle="dropdown"><strong>Order By</strong>
-                <span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                    <!-- This is loaded dynamically from the database (all subsystem names) -->
-                </ul>
-            </div>
-        </div>
-
-        <!-- Opens the add window -->
-        <div class="col-sm-1 bigbreathe-left breathe-top">
-            <button id="addIssue" class="btn btnAdd" type="button"><strong>NEW 🚀</strong></button>
-        </div>
-    </div>
-
+    </section>
 
     <!-- Auto Updater -->
     <div class="version">
