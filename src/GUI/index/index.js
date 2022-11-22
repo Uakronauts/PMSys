@@ -2,6 +2,7 @@
 const remote = require('electron').remote;  // For using electron modules remotely (?)
 const BrowserWindow = remote.BrowserWindow; // For launching an external window
 
+var { GLOBAL_QUERY } = require("../global-query");
 const { getTableContent, populateDropdown } = require("../sql-loader");
 
 window.onload = loadDropdownContent;
@@ -19,6 +20,8 @@ function loadDropdownContent(){
 
 async function loadSystemContent(){
     let systemDropdown = document.getElementById('sysDrpContent');
+    // clear all existing content in the element
+    systemDropdown.innerHTML = '';
 
     //load the content from the system database
     let content = await getTableContent("SystemsTable");
@@ -45,9 +48,6 @@ async function loadSubsystemContent(parentSys = "*"){
     // convert the array into <li> elements and place within the dropdown
     populateDropdown(subsystemDropdown, content, "ParentSys");
 }
-
-
-
 
 // ---------------------------------------------------------- \\
 
@@ -82,3 +82,4 @@ function launchNewPage(){
 }
 
 // ------------------------------------------------- \\
+

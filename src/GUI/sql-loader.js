@@ -1,6 +1,7 @@
 // Loads query content into a div.
 
-const { queryDatabase } = require("../sql-drivers/sql-helpers")
+const { queryDatabase } = require("../sql-drivers/sql-helpers");
+const { loadSubsystemContent } = require("./index");
 
 // Generate content inside the div using a query result as an argument.
 // Result is an array of RowDataPacket objects
@@ -105,8 +106,22 @@ var populateDropdown = function(dropdownElem, elems, spacerAttribute = undefined
             // Add an event listener that waits for a click to create a reaction event
             // for querying the database. This is for SYSTEMS table (should not modify)
             // subsystems dropdown, but should still add.modify a query element
-            liElem.addEventListener('click', function(){
-                console.log(`${this.innerText} <- THIS SYSTEM IS ME!`)
+            liElem.addEventListener('click', async function(){
+                console.log(`${this.innerText} <- THIS SYSTEM IS ME!`);
+
+                // get the system query & set it to the appropriate value
+                document.getElementById("systemQuery");
+                systemQuery.innerText = `SystemsTable = '${this.innerText}'`;
+                createQueryClose(systemQuery);
+                
+                unhideElement(systemQuery);
+
+                unhideQueryDisplay();
+
+                // TODO: system needs to check currently selected subsystem (if there is one) to make sure it is within
+                // TODO: the correct system (if not, needs to be cleared)
+
+                reloadSubsystemDropdown(this.innerText);
             })
         }
         else //ParentSys is undefined (subsystem)
@@ -116,13 +131,96 @@ var populateDropdown = function(dropdownElem, elems, spacerAttribute = undefined
             // auto select the appropriate parent system from the systems dropdown by
             // finding and "clicking" the appropriate li element
             liElem.addEventListener('click', function(){
-                console.log(`${this.innerText} <- THIS SUBSYSTEM IS ME!`)
+                console.log(`${this.innerText} <- THIS SUBSYSTEM IS ME!`);
+
+                // get the subsystem query & set it to the appropriate value
+                document.getElementById("subsystemQuery");
+                subsystemQuery.innerText = `SubsystemsTable = '${this.innerText}'`;
+                createQueryClose(subsystemQuery);
+
+                unhideElement(subsystemQuery);
+
+                unhideQueryDisplay();
+
             })
         }
 
 
         dropdownElem.appendChild(liElem);
     });
+}
+
+function createQueryClose(elem)
+{
+    let closeSpan = document.createElement('span');
+    closeSpan.classList.add("queryClose");
+    closeSpan.innerText = '⨯';
+
+    closeSpan.addEventListener("click", function() {
+        //TODO remove the selected query portion from the total query (this will automatically cause the database to redisplay)
+    
+    
+        // set the display to none
+        this.parentElement.classList.add('hidden');
+
+        // if the parent element is the system query, need to unlock all the rest of the subsystems
+        // ie. reload the dropdown with nothing selected
+        if(this.parentElement.id === "systemQuery")
+        {
+            reloadSubsystemDropdown();
+        }
+    
+        // check if ANY queries are being displayed (if not, hide the query pane)
+        let numHidden = 0;
+    
+        let closebtns = document.getElementsByClassName("queryClose");
+    
+        for (i = 0; i < closebtns.length; i++){
+            if(closebtns[i].parentElement.classList.contains('hidden'))
+            {
+                numHidden++;
+            }
+        };
+        console.log(numHidden);
+        if(numHidden === closebtns.length){
+            document.getElementById("queryDisplay").classList.add("hidden");
+        }        
+    
+      });
+
+    elem.appendChild(closeSpan);
+}
+
+function unhideElement(elem)
+{
+    if(elem.classList.contains("hidden")){
+        elem.classList.remove("hidden");
+    }
+
+    return;
+}
+
+function unhideQueryDisplay()
+{
+    unhideElement(document.getElementById("queryDisplay"));
+}
+
+async function reloadSubsystemDropdown(parentSys = "*")
+{
+    //system needs to adjust subsystem when chosen.
+    let subsystemDropdown = document.getElementById('subsysDrpContent');
+    // clear all existing content in the element
+    subsystemDropdown.innerHTML = '';
+    
+    let query = parentSys;
+    if(query !== "*")
+    {
+        query = `SubsystemsTable.ParentSys = '${parentSys}'`;
+    }
+
+    let content = await getTableContent("SubsystemsTable", query, "ParentSys DESC");
+
+    populateDropdown(subsystemDropdown, content, "ParentSys");
 }
 
 module.exports = {
