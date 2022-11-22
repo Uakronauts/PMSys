@@ -1,7 +1,6 @@
 // Loads query content into a div.
 
 const { queryDatabase } = require("../sql-drivers/sql-helpers");
-const { loadSubsystemContent } = require("./index");
 
 // Generate content inside the div using a query result as an argument.
 // Result is an array of RowDataPacket objects
@@ -120,6 +119,21 @@ var populateDropdown = function(dropdownElem, elems, spacerAttribute = undefined
 
                 // TODO: system needs to check currently selected subsystem (if there is one) to make sure it is within
                 // TODO: the correct system (if not, needs to be cleared)
+                let ssQuery = document.getElementById("subsystemQuery");
+                
+                
+                if(ssQuery.innerText !== '')
+                {
+                    let firstTick = ssQuery.innerText.indexOf(`'`);
+                    let lastTick = ssQuery.innerText.indexOf(`'`, firstTick+1);
+                    
+                    // if subsystem parent is not the same as the new system (remove it)
+                    if(!await checkSubsystemParent(ssQuery.innerText.substring(firstTick+1, lastTick), this.innerText))
+                    {
+                        ssQuery.lastChild.click();
+                    }
+                }
+                
 
                 reloadSubsystemDropdown(this.innerText);
             })
@@ -136,6 +150,7 @@ var populateDropdown = function(dropdownElem, elems, spacerAttribute = undefined
                 // get the subsystem query & set it to the appropriate value
                 document.getElementById("subsystemQuery");
                 subsystemQuery.innerText = `SubsystemsTable = '${this.innerText}'`;
+
                 createQueryClose(subsystemQuery);
 
                 unhideElement(subsystemQuery);
@@ -181,7 +196,7 @@ function createQueryClose(elem)
                 numHidden++;
             }
         };
-        console.log(numHidden);
+
         if(numHidden === closebtns.length){
             document.getElementById("queryDisplay").classList.add("hidden");
         }        
@@ -221,6 +236,14 @@ async function reloadSubsystemDropdown(parentSys = "*")
     let content = await getTableContent("SubsystemsTable", query, "ParentSys DESC");
 
     populateDropdown(subsystemDropdown, content, "ParentSys");
+}
+
+async function checkSubsystemParent(subsystem, sysToCheck)
+{
+    query = `Name = '${subsystem}'`;
+    let content = await getTableContent("SubsystemsTable", query, "ParentSys DESC");
+
+    return content[0]["ParentSys"] === sysToCheck;
 }
 
 module.exports = {
