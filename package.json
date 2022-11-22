@@ -19,7 +19,8 @@
     "electron-builder": "^22.13.1"
   },
   "dependencies": {
-    "bootstrap": "^5.2.2",
+    "jquery": "^3.6.0",
+    "bootstrap": "^3.4.1",
     "electron-updater": "^4.3.9",
     "mysql": "^2.18.1"
   },

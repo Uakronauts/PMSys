@@ -17,7 +17,7 @@ function createWindow() {
     autoHideMenuBar: true,      // console is CTRL+SHIFT+i, show menu is ALT
     title: projTitle
   })
-  mainWindow.loadFile('src/GUI/index.html'),
+  mainWindow.loadFile('src/GUI/index/index.html'),
 
   mainWindow.on('closed', function() {
     mainWindow = null;

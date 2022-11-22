@@ -1,6 +1,6 @@
 var { createConn } = require('../sql-connection');
 
-let conn = createConn();
+let conn = createConn("PMSys");
 
 let sql = `
 SHOW FULL TABLES

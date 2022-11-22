@@ -10,13 +10,23 @@ FLUSH PRIVILEGES;
 
 var mysql = require('mysql');
 
+
+const HOSTNAME = "pmsys.cveq8mxavi6m.us-east-2.rds.amazonaws.com";
+const PORT = "3306";
+
+const USER = "admin";
+const PASSWORD = "PMSYSAkronauts!EhS#001";
+
+
 // Create a connection to a given database (default to PMSys DB)
-var createConn = function(dbName = 'PMSys_Beta')
+var createConn = function(dbName = 'PMSys')
 {
     let conn = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "RMMLSQL!Mani",
+        host: HOSTNAME,
+        port: PORT,
+        user: USER,
+        password: PASSWORD,
+
         database: dbName
     });
     

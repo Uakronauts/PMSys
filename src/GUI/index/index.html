@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="index.css">
+
+    <script src="../../../node_modules/jquery/dist/jquery.min.js"></script>
+    <script> window.jQuery = window.$ = require('jquery'); //fixes bootstrap???? </script>
+    <script src="../../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Top Menu Section -->
+    <section> 
+        <div class="header-row row">
+            <div class="col-sm-1 breathe-top">
+                <!-- System Dropdown -->
+                <div class="dropdown">
+                    <button id="systemDrp" class="btn dropdown-toggle btnDropdown"
+                        type="button" data-toggle="dropdown"><strong>⚗️System</strong>
+                    <span class="caret"></span></button>
+                    <ul id="sysDrpContent" class="dropdown-menu">
+                        <!-- This is loaded dynamically from the database (all system names) -->
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-sm-1 breathe-left breathe-top">
+                <!-- Subsystem Dropdown -->
+                <div id="subsysDrpDiv" class="dropdown">
+                    <button id="subsysDrp" class="btn dropdown-toggle btnDropdown"
+                        type="button" data-toggle="dropdown"><strong>⚒️Subsystem</strong>
+                    <span class="caret"></span></button>
+                    <ul id="subsysDrpContent" class="dropdown-menu">
+                        <!-- This is loaded dynamically from the database (all subsystem names) -->
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-sm-4 bigbreathe-left">
+                <!-- Textbox for query input -->
+                <input class="form-control input-lg darkInput" id="inputlg" type="text"
+                        placeholder="🔎︎ search using custom filters">
+            </div>
+
+            <div class="col-sm-1 breathe-top">
+                <!-- Order by Dropdown -->
+                <div class="dropdown">
+                    <button id="sortDrp" class="btn dropdown-toggle btnDropdown"
+                        type="button" data-toggle="dropdown"><strong>Order By</strong>
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <!-- This is loaded dynamically from the database (all subsystem names) -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Opens the add window -->
+            <div class="col-sm-1 bigbreathe-left breathe-top">
+                <button id="addIssue" class="btn btnAdd" type="button"><strong>NEW 🚀</strong></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Query Details Section -->
+    <section>
+        <div class="row">
+            <ul id="queryDisplay" class="hidden">
+                <li class="floatLeft">Queries: </li>
+                <li id="systemQuery" class="queryDisplay floatLeft hidden"></li>
+                <li id="subsystemQuery" class="queryDisplay floatLeft hidden"></li>
+                <li id="otherQuery" class="queryDisplay floatLeft hidden"></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Auto Updater -->
+    <div class="version">
+        <strong id="version"></strong>
+    </div>
+
+    <div id="notification" class="alert alert-info
+                                hidden
+                                fade in out">
+        <p id="message"></p>
+        <button onclick="closeNotification()">Close</button>
+        <button id="restart-button" class="hidden" onclick="restartApp()">Restart</button>
+    </div>
+    <!-- End of Auto Updater -->
+
+</body>
+    <script src="./index.js"></script>
+    <script src="../../auto-updater/updater.js"></script>
+</html>

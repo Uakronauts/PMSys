@@ -2,76 +2,108 @@ var { createConn } = require('../sql-connection');
 
 let conn = createConn();
 
-/*
-id
-system
-subsystem
-name
-description
-startdate
-numdays
-*/
+var table = null;
 
-var PMSysBeta = `
-CREATE TABLE DataTable
-(
-    id INT,
-    
-    title VARCHAR(64),
-    description VARCHAR(512),
-    
-    syslab VARCHAR(16),
-    subsystem VARCHAR(16),
-
-    startdate DATE,
-    numdays INT, CHECK(numdays > 0),
-
-
-    PRIMARY KEY(id)
-);
-`;
-
-// var taskTable = `
-// CREATE TABLE testTable
+// `
+// CREATE TABLE SystemsTable
 // (
-//     name VARCHAR(255) PRIMARY KEY,
-//     id INT
+//     Name VARCHAR(64),
+//     Description VARCHAR(512),
+
+//     PRIMARY KEY (Name)
+// );
+// `
+
+// `
+// CREATE TABLE SubsystemsTable
+// (
+//     Name VARCHAR(64),
+//     Description VARCHAR(512),
+
+//     ParentSys VARCHAR(64),
+//     FOREIGN KEY (ParentSys) REFERENCES SystemsTable(Name),
+
+//     PRIMARY KEY (Name)
+// );`
+
+// `CREATE TABLE DataTable
+// (
+//     ID INT,
+//     IssueType VARCHAR(64),
+
+//     Title VARCHAR(64),
+//     Description VARCHAR(512),
+
+//     StartDate DATE,
+//     NumDays INT,
+
+//     PercentCompleted INT NOT NULL,
+
+//     Assignee VARCHAR(64),
+//     ParentSubsys VARCHAR(64),
+
+//     FOREIGN KEY (ParentSubsys) REFERENCES SubsystemsTable(Name),
+
+//     CHECK (NumDays >= 0),
+//     CHECK (PercentCompleted >= 0 AND PercentCompleted <= 100),
+
+//     PRIMARY KEY (ID)
 // );
 // `;
 
-// var projectTable = `
-// CREATE TABLE testTable
+
+
+// `CREATE TABLE ProjectTable
 // (
-//     name VARCHAR(255) PRIMARY KEY,
-//     id INT
+//     ProjectID INT,
+
+//     Title VARCHAR(64),
+//     Description VARCHAR(512),
+
+//     StartDate DATE,
+//     NumDays INT,
+
+//     PRIMARY KEY (ProjectID),
+//     FOREIGN KEY (ProjectID) REFERENCES DataTable(ID),
+
+//     CHECK (NumDays >= 0)
+// );
+// `
+
+// `CREATE TABLE TaskTable
+// (
+//     TaskID INT,
+
+//     Title VARCHAR(64),
+//     Description VARCHAR(512),
+
+//     StartDate DATE,
+//     NumDays INT,
+
+//     PercentCompleted INT NOT NULL,
+
+//     Assignee VARCHAR(64),
+
+//     CHECK (NumDays >= 0),
+//     CHECK (PercentCompleted >= 0 AND PercentCompleted <= 100),
+
+//     PRIMARY KEY (TaskID),
+//     FOREIGN KEY (TaskID) REFERENCES DataTable(ID)
+// );
+// `
+
+
+// `CREATE TABLE DataTable
+// (
+//     ID INT,
+//     IssueType VARCHAR(32),
+
+//     PRIMARY KEY(ID)
 // );
 // `;
 
-// var dataTable = `
-// CREATE TABLE testTable
-// (
-//     name VARCHAR(255) PRIMARY KEY,
-//     id INT
-// );
-// `;
 
-// var subsystemTable = `
-// CREATE TABLE testTable
-// (
-//     name VARCHAR(255) PRIMARY KEY,
-//     id INT
-// );
-// `;
-
-// var systemTable = `
-// CREATE TABLE testTable
-// (
-//     name VARCHAR(255) PRIMARY KEY,
-//     id INT
-// );
-// `;
-
-let sql = PMSysBeta;
+let sql = table;
 
 conn.query(sql, function (err, result) {
 if (err) throw err;
