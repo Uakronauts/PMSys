@@ -1,13 +1,10 @@
 var { createConn } = require('../sql-connection');
 const { RDPToText, resToText } = require('../sql-helpers');
 
-let conn = createConn('testDB');
+let conn = createConn();
 
 let sql = `
-SELECT *
-FROM testtable
-WHERE id > 1
-`
+DROP TABLE DataTable`
 
 // conn.query(sql, function (err, result, fields) {
 //     if (err) throw err;

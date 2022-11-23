@@ -91,11 +91,67 @@ var RDPToText = function(RowDataPacket){
     return ret;
 }
 
+// Generate content inside the div using a query result as an argument.
+// Result is an array of RowDataPacket objects
+var getTableContent = async function(table, condition = "*", ordering = "*"){
+    // create a connection & query a database
+    // needs to select all for System and Subsystem tables because
+    // we need to see if the content has a ParentSys attribute
+    let sql = '';
+    if(condition === '*')
+    {
+        if(ordering === '*')
+        {
+            sql = 
+            `
+            SELECT *
+            FROM ${table}
+            `;
+        }
+        else
+        {
+            sql = 
+            `
+            SELECT *
+            FROM ${table}
+            ORDER BY ${ordering}
+            `;
+        }
+        
+    }
+    else
+    {
+        if(ordering === '*')
+        {
+            sql = 
+            `
+            SELECT *
+            FROM ${table}
+            WHERE ${condition}
+            `
+        }
+        else
+        {
+            sql = 
+            `
+            SELECT *
+            FROM ${table}
+            WHERE ${condition}
+            ORDER BY ${ordering}
+            `
+        }
+    }
+
+    let data = await queryDatabase(sql);
+    return data;
+}
+
 module.exports = {
     detectSqlKeywords: detectSqlKeywords,
     addToDatabase: addToDatabase,
     queryHighestID: queryHighestID,
     queryDatabase: queryDatabase,
+    getTableContent: getTableContent,
 
     resToText: resToText,
     RDPToText: RDPToText

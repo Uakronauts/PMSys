@@ -1,61 +1,8 @@
 // Loads query content into a div.
 
-const { queryDatabase } = require("../sql-drivers/sql-helpers");
+const { getTableContent } = require("../../sql-drivers/sql-helpers");
+const { GLOBAL_QUERY } = require("../global-query");
 
-// Generate content inside the div using a query result as an argument.
-// Result is an array of RowDataPacket objects
-var getTableContent = async function(table, condition = "*", ordering = "*"){
-    // create a connection & query a database
-    // needs to select all for System and Subsystem tables because
-    // we need to see if the content has a ParentSys attribute
-    let sql = '';
-    if(condition === '*')
-    {
-        if(ordering === '*')
-        {
-            sql = 
-            `
-            SELECT *
-            FROM ${table}
-            `;
-        }
-        else
-        {
-            sql = 
-            `
-            SELECT *
-            FROM ${table}
-            ORDER BY ${ordering}
-            `;
-        }
-        
-    }
-    else
-    {
-        if(ordering === '*')
-        {
-            sql = 
-            `
-            SELECT *
-            FROM ${table}
-            WHERE ${condition}
-            `
-        }
-        else
-        {
-            sql = 
-            `
-            SELECT *
-            FROM ${table}
-            WHERE ${condition}
-            ORDER BY ${ordering}
-            `
-        }
-    }
-
-    let data = await queryDatabase(sql);
-    return data;
-}
 
 // Populates a dropdown menu element passed in as dropdownElem (ul type)
 // 
@@ -110,17 +57,17 @@ var populateDropdown = function(dropdownElem, elems, spacerAttribute = undefined
 
                 // get the system query & set it to the appropriate value
                 document.getElementById("systemQuery");
-                systemQuery.innerText = `SystemsTable = '${this.innerText}'`;
+                systemQuery.innerText = `System = '${this.innerText}'`;
+
+                GLOBAL_QUERY.setAttribute("systemQuery", systemQuery.innerText);
+
                 createQueryClose(systemQuery);
                 
                 unhideElement(systemQuery);
 
                 unhideQueryDisplay();
 
-                // TODO: system needs to check currently selected subsystem (if there is one) to make sure it is within
-                // TODO: the correct system (if not, needs to be cleared)
                 let ssQuery = document.getElementById("subsystemQuery");
-                
                 
                 if(ssQuery.innerText !== '')
                 {
@@ -134,8 +81,9 @@ var populateDropdown = function(dropdownElem, elems, spacerAttribute = undefined
                     }
                 }
                 
-
                 reloadSubsystemDropdown(this.innerText);
+
+
             })
         }
         else //ParentSys is undefined (subsystem)
@@ -149,13 +97,17 @@ var populateDropdown = function(dropdownElem, elems, spacerAttribute = undefined
 
                 // get the subsystem query & set it to the appropriate value
                 document.getElementById("subsystemQuery");
-                subsystemQuery.innerText = `SubsystemsTable = '${this.innerText}'`;
+                subsystemQuery.innerText = `Subsystem = '${this.innerText}'`;
+                
+                // add it to the global query
+                GLOBAL_QUERY.setAttribute("subsystemQuery", subsystemQuery.innerText);
 
                 createQueryClose(subsystemQuery);
 
                 unhideElement(subsystemQuery);
 
                 unhideQueryDisplay();
+
 
             })
         }
@@ -172,8 +124,8 @@ function createQueryClose(elem)
     closeSpan.innerText = '⨯';
 
     closeSpan.addEventListener("click", function() {
-        //TODO remove the selected query portion from the total query (this will automatically cause the database to redisplay)
-    
+        // remove the selected query portion from the total query (this will automatically cause the database to redisplay)
+        GLOBAL_QUERY.clearAttribute(this.parentElement.id);
     
         // set the display to none
         this.parentElement.classList.add('hidden');
@@ -245,6 +197,9 @@ async function checkSubsystemParent(subsystem, sysToCheck)
 
     return content[0]["ParentSys"] === sysToCheck;
 }
+
+
+
 
 module.exports = {
     getTableContent: getTableContent,

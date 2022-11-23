@@ -55,6 +55,9 @@ input.darkInput{
 
   /* Text Color */
   color: #C7C7C7;
+
+  padding: 2.5vh 2.2vw;
+
 }
 
 
@@ -84,6 +87,14 @@ li.queryDisplay {
   font-weight: bold;
 }
 
+/* Absolute Positioning */
+.abs-bottom-left{
+  position:absolute;
+
+  left: 1%;
+  bottom: 1%;
+}
+
 /* Style the close button (span) */
 span.queryClose {
   cursor: pointer;
@@ -94,3 +105,57 @@ span.queryClose {
 }
 
 span.queryClose:hover {color: #000000;}
+
+/* MAIN DATA GRID */
+div#mainDisplayTableWrapper{
+  position:absolute;
+  top: 17%;
+  height: 75%;
+
+  /* (left*2 + width) should always = 100! */
+  left: 2%;
+  width: 96%;
+
+  background-color: rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+}
+
+div#mainDisplayTable{
+  /* Inner padding for text/element spacing */
+  padding: 0% 1%;
+}
+
+h1#subsysLabel{
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+/* div#timeline{
+
+} */
+
+/* Feedback Styling */
+
+div.flexDisplay{
+  display: flex;
+  justify-content: center;
+}
+
+div.absoluteCenter{
+  position: absolute;
+  top: 50%;
+}
+
+.mainFeedback{
+  text-align: center;
+  color: #3B3B3B;
+  font-weight: bold;
+  margin: 0%;
+}
+
+.hintFeedback{
+  text-align: center;
+  color: #3B3B3B;
+  font-weight: bold;
+  margin: 0%;
+}
