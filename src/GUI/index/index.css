@@ -170,3 +170,14 @@ div.absoluteCenter{
   font-weight: bold;
   margin: 0%;
 }
+
+
+ /* Error Display */
+ .errorDisplay{
+  position: absolute;
+
+  bottom: 2%;
+  left: 5%;
+  
+  width:90%;
+ }

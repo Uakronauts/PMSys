@@ -1,6 +1,6 @@
 // Loads query content into a div.
 
-const { getTableContent } = require("../../sql-drivers/sql-helpers");
+const { getTableContent, detectSqlKeywords } = require("../../sql-drivers/sql-helpers");
 const { GLOBAL_QUERY } = require("../global-query");
 
 
@@ -163,13 +163,22 @@ function createQueryClose(elem)
 // #region OTHER INPUT
 
 otherInputBox = document.getElementById('otherQueryInput');
-otherInputBox.addEventListener('keyup', function onEvent(e) {
+otherInputBox.addEventListener('keyup', async function onEvent(e) {
     // If enter key is pressed.
     if (e.keyCode === 13) {
-        console.log(otherInputBox.value);
-
         //check the value for sensitive keywords & show the warning if needed
-        
+        let ret = await detectSqlKeywords(otherInputBox.value, function(query, keyword) {
+            console.warn(`${query} contains ${keyword}`);
+
+            let warningMsg = document.getElementById("warningTemp");
+            warningMsg.innerText = `OTHER QUERY WARNING: '${query}' contains '${keyword}'`;
+            warningMsg.classList.remove("hidden");
+
+            setTimeout(() => {
+                warningMsg.classList.add("hidden");
+            }, 5000)
+
+        });
         
         //?depending on the way we want to do this (execute with/without an error)
 

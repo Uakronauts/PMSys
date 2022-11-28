@@ -5,14 +5,14 @@ const { sqlKeywords } = require('../globals/globals');
 
 // Search each query for each keyword and warn when applicable
 //? Return true when keyword is detected, false if undetected
-var detectSqlKeywords = async function(query){
+var detectSqlKeywords = async function(query, func){
     if(query !== null)
     {
         sqlKeywords.forEach(keyword => {
             // If the query contains the sqlkeyword
             if((query.toUpperCase()).includes(keyword))
             {
-                console.warn(`${query} contains ${keyword}`);
+                func(query, keyword);
                 return true;
             }
         });
