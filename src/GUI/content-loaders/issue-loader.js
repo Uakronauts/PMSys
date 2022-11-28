@@ -35,10 +35,16 @@ async function verifyQueryData(data)
     if(data === undefined ){
         displayFeedback(-1);
     }
+    // if the query throws an error
+    else if(data instanceof Error){
+        displayFeedback(data.message);
+    }
     // data array is empty (query ran but table was empty... maybe too specific? impossible query)
     else if (data.length === 0){
         displayFeedback(-2);
     }
+
+
     // All seems good!
     else{
         hideFeedback();
@@ -74,7 +80,7 @@ function displayFeedback(feedbackCode)
     // Else used as a catch all for string output
     else
     {
-        mainQueryFeedback.innerText = "☠️ Some unknown error occurred."
+        mainQueryFeedback.innerText = "☠️ Some error occurred."
         feedbackHint.innerText = feedbackCode;
     }
 

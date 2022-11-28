@@ -158,6 +158,41 @@ function createQueryClose(elem)
     elem.appendChild(closeSpan);
 }
 
+//* HANDLE AN OTHER QUERY INPUT *\\
+// ------------------------------------------------- \\
+// #region OTHER INPUT
+
+otherInputBox = document.getElementById('otherQueryInput');
+otherInputBox.addEventListener('keyup', function onEvent(e) {
+    // If enter key is pressed.
+    if (e.keyCode === 13) {
+        console.log(otherInputBox.value);
+
+        //check the value for sensitive keywords & show the warning if needed
+        
+        
+        //?depending on the way we want to do this (execute with/without an error)
+
+        //add the text to the global query & create the filter object
+        GLOBAL_QUERY.otherQuery = otherInputBox.value;
+
+        let otherQuery = document.getElementById("otherQuery");
+
+        otherQuery.innerText = otherInputBox.value;
+        otherInputBox.value = '';
+
+        createQueryClose(otherQuery);
+
+        unhideElement(otherQuery);
+
+        unhideQueryDisplay();
+    }
+
+});
+
+// #endregion
+// ------------------------------------------------- \\
+
 function unhideElement(elem)
 {
     if(elem.classList.contains("hidden")){

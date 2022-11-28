@@ -37,7 +37,7 @@ var queryDatabase = async function(sql){
 
     var queryPromise = new Promise((resolve, reject) => {
         conn.query(sql, function (err, result, fields) {
-            if (err) throw err;
+            if (err) return resolve(err);
     
             resolve(result);
         });
@@ -47,7 +47,6 @@ var queryDatabase = async function(sql){
     {
         conn.end();
 
-        //console.log(val);
         return val;
     });   
 

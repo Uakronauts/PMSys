@@ -79,12 +79,23 @@ li.queryDisplay {
   border-style: solid;
   border-color: #b7b7b7;
 
-  background-color: #28d139;
   opacity: 75%;
 
   color: #202020;
   font-family: 'Segoe UI';
   font-weight: bold;
+}
+
+li.fillGreen{
+  background-color: #28d139;
+}
+
+li.fillPink{
+  background-color: #ffc0cb;
+}
+
+li.fillBlue{
+  background-color: #87cefa;
 }
 
 /* Absolute Positioning */
