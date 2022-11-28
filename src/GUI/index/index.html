@@ -82,13 +82,13 @@
             <!-- Feedback for empty/failed queries in the middle of the wrapper -->
             <!-- Hidden if the query is successful -->
             <div id="displayFeedbackWrapper" class="absoluteCenter">
-                <h3 id="mainQueryFeedback" class="mainFeedback"></h3>
-                <h5 id="feedbackHint" class="hintFeedback"></h5>
+                <h3 id="mainQueryFeedback" class="mainFeedback">☠️ Nothing to display...</h3>
+                <h5 id="feedbackHint" class="hintFeedback">Maybe add some filters</h5>
             </div>
 
-            <div id="mainDisplayTableWrapper">
+            <div id="mainDisplayTableWrapper" class="hidden">
                 <div id="mainDisplayTable">
-                    <h1 id="subsysLabel">⚡Avionics</h1>
+                    <h1 id="subsysLabel">Subsystem Name</h1>
                     
                     <!-- Loaded dynamically depending on the number of days selected -->
                     <!--
