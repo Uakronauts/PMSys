@@ -1,12 +1,14 @@
-const { queryDatabase } = require("../../sql-drivers/sql-helpers");
 const { GLOBAL_QUERY } = require("../global-query");
 
 var registerAttributeListeners = function()
 {
     GLOBAL_QUERY.registerSubsystemListener(function(val){
-        console.log(`Subsystem query changed! ${val}`);
+        //console.log(`Subsystem query changed! ${val}`);
 
-        populateIssueTable();
+        if(val !== "")
+        {
+            populateIssueTable();
+        }
     });
 }
 
