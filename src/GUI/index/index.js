@@ -4,7 +4,7 @@ const BrowserWindow = remote.BrowserWindow; // For launching an external window
 
 //* CONTENT LOADERS
 const { populateDropdown } = require("../content-loaders/dropdown-loader");
-const { populateIssueTable } = require('../content-loaders/issue-loader');
+const { populateIssueTable, registerAttributeListeners } = require('../content-loaders/issue-loader');
 
 const { getTableContent } = require("../../sql-drivers/sql-helpers");
 
@@ -17,6 +17,8 @@ function loadDropdownContent(){
     // query the database for all systems and subsystems
     loadSystemContent();
     loadSubsystemContent();
+
+    registerAttributeListeners();
 }
 
 async function loadSystemContent(){

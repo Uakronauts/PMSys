@@ -7,7 +7,7 @@ var registerAttributeListeners = function()
         console.log(`Subsystem query changed! ${val}`);
 
         populateIssueTable();
-    })
+    });
 }
 
 // load the issue content into a container (div) element
@@ -19,7 +19,7 @@ var populateIssueTable = async function(){
     if(await verifyQueryData(data)){
         showTable();
 
-
+        
 
 
     }
@@ -97,5 +97,6 @@ function showTable(){
 }
 
 module.exports = {
-    populateIssueTable: populateIssueTable
+    populateIssueTable: populateIssueTable,
+    registerAttributeListeners: registerAttributeListeners
 }
