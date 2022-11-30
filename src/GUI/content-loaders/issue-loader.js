@@ -28,7 +28,7 @@ var populateIssueTable = async function(){
         
         for(let i = 0; i < data.length; ++i)
         {
-            RDPtoDisplayRow(data[i], display, 2);
+            RDPtoDisplayRow(data[i], display, 1);
         }
         
         if(display.innerHTML === '')
