@@ -28,7 +28,7 @@ var populateIssueTable = async function(){
         
         for(let i = 0; i < data.length; ++i)
         {
-            RDPtoDisplayRow(data[i], display, 1);
+            RDPtoDisplayRow(data[i], display, 3);
         }
         
         if(display.innerHTML === '')
@@ -110,7 +110,7 @@ function RDPtoDisplayRow(RDP, displayDiv, displayInd){
     rowDiv.classList.add('row');
     rowDiv.classList.add('issueWrapper');
 
-    let issueClass = `issueType-${RDP["IssueType"]} ic${displayInd % 3}`;// ic${displayInd % 3}`
+    let issueClass = `issueType-${RDP["IssueType"]} ic${displayInd}`;// ic${displayInd % 3}`
 
     let rowHTML = `
     <div id="iid${RDP["ID"]}" class="col-sm-9 ${issueClass}">
