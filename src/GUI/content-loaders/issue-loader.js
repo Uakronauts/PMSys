@@ -23,10 +23,12 @@ var populateIssueTable = async function(){
 
         let display = document.getElementById("mainDisplayTable");
         display.innerHTML = '';
+
+        let funnyColour = getRandomInt(3);
         
         for(let i = 0; i < data.length; ++i)
         {
-            RDPtoDisplayRow(data[i], display, i);
+            RDPtoDisplayRow(data[i], display, 2);
         }
         
         if(display.innerHTML === '')
@@ -108,7 +110,7 @@ function RDPtoDisplayRow(RDP, displayDiv, displayInd){
     rowDiv.classList.add('row');
     rowDiv.classList.add('issueWrapper');
 
-    let issueClass = `issueType-${RDP["IssueType"]} ic${displayInd % 3}`
+    let issueClass = `issueType-${RDP["IssueType"]} ic${displayInd % 3}`;// ic${displayInd % 3}`
 
     let rowHTML = `
     <div id="iid${RDP["ID"]}" class="col-sm-9 ${issueClass}">
@@ -122,6 +124,12 @@ function RDPtoDisplayRow(RDP, displayDiv, displayInd){
             </div>
             <div class="col-sm-2">
                 <h6 class="${issueClass}"><strong>${RDP["PercentCompleted"]}</strong>% completed</h6>
+            </div>
+            <div class="col-sm-2">
+                <h6 class="${issueClass}">Assignee: <strong>${RDP["Assignee"]}</strong></h6>
+            </div>
+            <div class="col-sm-4">
+                <h6 class="${issueClass}">Desc: ${RDP["Description"]}</strong></h6>
             </div>
         </div>
     </div>
@@ -175,6 +183,10 @@ function hideTable(){
 
 function showTable(){
     document.getElementById("mainDisplayTableWrapper").classList.remove("hidden");
+}
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
 }
 
 module.exports = {

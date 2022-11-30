@@ -4,11 +4,11 @@ let conn = createConn();
 
 let tempSql = `
 INSERT INTO DataTable (ID, IssueType, Title, StartDate, EndDate, PercentCompleted, Subsystem, ParentProj)
-VALUES (4,'Task', 'Create wiring schematic & PCB', '2022-9-01', '2022-10-15', 100, 'Avionics', 1);
+VALUES (7,'Task', 'Create basic GUI for mobile platforms', '2022-10-01', '2022-12-17', 40, 'Avionics', 5);
 `;
 
 let tempSq2l = `
-DELETE FROM DataTable WHERE ID > 0;
+DELETE FROM DataTable WHERE ID > ;
 
 `;
 
