@@ -2,20 +2,23 @@
 const remote = require('electron').remote;  // For using electron modules remotely (?)
 const BrowserWindow = remote.BrowserWindow; // For launching an external window
 
-var { GLOBAL_QUERY } = require("../global-query");
-const { getTableContent, populateDropdown } = require("../sql-loader");
+//* CONTENT LOADERS
+const { populateDropdown } = require("../content-loaders/dropdown-loader");
+const { populateIssueTable, registerAttributeListeners } = require('../content-loaders/issue-loader');
+
+const { getTableContent } = require("../../sql-drivers/sql-helpers");
 
 window.onload = loadDropdownContent;
 
 //* LOAD THE DROPDOWN CONTENT (FOR SYSTEM/SUBSYSTEM) ON LOAD *\\
 // ---------------------------------------------------------- \\
+//#region DROPDOWNCONTENT
 function loadDropdownContent(){
     // query the database for all systems and subsystems
     loadSystemContent();
     loadSubsystemContent();
 
-
-
+    registerAttributeListeners();
 }
 
 async function loadSystemContent(){
@@ -48,13 +51,17 @@ async function loadSubsystemContent(parentSys = "*"){
     // convert the array into <li> elements and place within the dropdown
     populateDropdown(subsystemDropdown, content, "ParentSys");
 }
+//#endregion
 
 // ---------------------------------------------------------- \\
 
 
 
+
+
 //* OPEN A NEW PAGE WHEN THE ADD BUTTON IS CLICKED *\\
 // ------------------------------------------------- \\
+// #region ADDPAGE
 let addButton = document.getElementById('addIssue');
 addButton.addEventListener('click', function(){
     launchNewPage();
@@ -80,6 +87,6 @@ function launchNewPage(){
 
     NewWindow.loadFile(newWindowHTML);
 }
-
+// #endregion
 // ------------------------------------------------- \\
 

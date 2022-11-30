@@ -55,6 +55,9 @@ input.darkInput{
 
   /* Text Color */
   color: #C7C7C7;
+
+  padding: 2.5vh 2.2vw;
+
 }
 
 
@@ -72,16 +75,40 @@ li.queryDisplay {
   padding: 0.5vh 1vw;
 
   border-radius: 3px;
-  border-width: 2px;
+  border-width: 1px;
   border-style: solid;
-  border-color: #b7b7b7;
+  border-color: #2f2f2f;
 
-  background-color: #28d139;
-  opacity: 75%;
+  /* color: #ffffff; */
 
-  color: #202020;
   font-family: 'Segoe UI';
   font-weight: bold;
+}
+
+li.fillGreen{
+  background-color: #0ed74057;
+  color: #0ED740;
+  border-color: #0ED740;
+}
+
+li.fillGold{
+  background-color: #FBD01457;
+  color: #FBD014;
+  border-color: #FBD014;
+}
+
+li.fillBlue{
+  background-color: #1389d757;
+  color: #1389d7;
+  border-color: #1389d7;
+}
+
+/* Absolute Positioning */
+.abs-bottom-left{
+  position:absolute;
+
+  left: 1%;
+  bottom: 1%;
 }
 
 /* Style the close button (span) */
@@ -90,7 +117,165 @@ span.queryClose {
   /* padding: 3px 4px; */
   margin-left: 2vw;
   margin-right: 0vw;
-  color:#101010;
 }
 
 span.queryClose:hover {color: #000000;}
+
+/* MAIN DATA GRID */
+div#mainDisplayTableWrapper{
+  position:absolute;
+  top: 17%;
+  height: 75%;
+
+  /* (left*2 + width) should always = 100! */
+  left: 2%;
+  width: 96%;
+
+  background-color: rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+div#mainDisplayTable{
+  /* Inner padding for text/element spacing */
+  padding: 0% 1%;
+}
+
+h1#subsysLabel{
+  color: #FFFFFF;
+  font-weight: bold;
+  margin-left: 1%;
+}
+
+/* div#timeline{
+
+} */
+
+/* Feedback Styling */
+
+div.flexDisplay{
+  display: flex;
+  justify-content: center;
+}
+
+div.absoluteCenter{
+  position: absolute;
+  top: 50%;
+}
+
+.mainFeedback{
+  text-align: center;
+  color: #3B3B3B;
+  font-weight: bold;
+  margin: 0%;
+}
+
+.hintFeedback{
+  text-align: center;
+  color: #3B3B3B;
+  font-weight: bold;
+  margin: 0%;
+}
+
+
+ /* Error Display */
+ .errorDisplay{
+  position: absolute;
+
+  bottom: 2%;
+  left: 5%;
+  
+  width:90%;
+ }
+
+/* DYNAMIC QUERY RESULTS STYLE */
+
+div.issueWrapper{
+  margin-bottom: 1%;
+  margin-left: 1%;
+}
+
+div.issueType-Project{
+  margin-left: 1%;
+}
+
+div.issueType-Task{
+  margin-left: 3%;
+}
+
+div.ic0{
+  background-color: #b40d9557;
+  border-radius: 5px;
+  border-color: #b40d95;
+  border-style: solid;
+}
+
+div.ic1{
+  background-color: #02A12257;
+  border-radius: 5px;
+  border-color: #02A122;
+  border-style: solid;
+}
+
+div.ic2{
+  background-color: #D93F0B57;
+  border-radius: 5px;
+  border-color: #D93F0B;
+  border-style: solid;
+}
+
+div.ic3{
+  background-color: #0f69a557;
+  border-radius: 5px;
+  border-color: #0f69a5;
+  border-style: solid;
+}
+
+div.ic4{
+  background-color: #eeeeee57;
+  border-radius: 5px;
+  border-color: #eeeeee;
+  border-style: solid;
+}
+
+h2.ic0{
+  color: #b40d95;
+}
+
+h2.ic1{
+  color: #02A122;
+}
+
+h2.ic2{
+  color: #D93F0B;
+}
+
+h2.ic3{
+  color: #0f69a5;
+}
+
+h2.ic4{
+  color: #eeeeee;
+}
+
+h6.ic0{
+  color: #b40d95;
+}
+
+h6.ic1{
+  color: #02A122;
+}
+
+h6.ic2{
+  color: #D93F0B;
+}
+
+h6.ic3{
+  color: #0f69a5;
+}
+
+h6.ic4{
+  color: #eeeeee;
+}

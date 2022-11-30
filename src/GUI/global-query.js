@@ -1,27 +1,169 @@
-
-
-
 // GLOBAL QUERY OBJECT
+// ---
+// Contains methods for manipulating the global query
+// and displaying certain attributes on the HTML table.
+
+const { queryDatabase } = require("../sql-drivers/sql-helpers");
+
 var GLOBAL_QUERY = {
-    queryInternal: "",
-    queryListener: function(val) {},
-    set query(val) {
-        this.queryInternal = val;
-        this.queryListener(val);
+    // Full Query Functions
+    _lastFullQuery: "", //* internal variable to represet the last executed full query
+    get fullQuery() {
+        let _fullQuery = "";
+
+        // If all the queries are blank, do not return anything (should not be able to query the entire)
+        // database at once...
+        if(!(this._systemQuery === "" && this._subsystemQuery === "" && this._otherQuery === ""))
+        {
+            _fullQuery = `
+            SELECT *
+            FROM DataTable
+            WHERE ${constructWhereClause("", this._subsystemQuery, this._otherQuery)}
+            ORDER BY IssueType ASC
+            `;
+        }
+        
+
+        return _fullQuery;
     },
-    get query() {
-        return this.queryInternal;
+
+    // System Query Variables
+    _systemQuery: "",   //* Internal variable
+    set systemQuery(val) {
+        this._systemQuery = val;
+        this._systemListener(val);
     },
-    registerListener: function(listener) {
-        this.queryListener = listener;
+    get systemQuery() {
+        return this._systemQuery;
+    },
+    _systemListener: function(val) {},
+    registerSystemListener: function(listener){
+        this._systemListener = listener;
+    },
+
+    // Subsystem Query Variables
+    _subsystemQuery: "",    //* Internal variable
+    set subsystemQuery(val) {
+        this._subsystemQuery = val;
+        this._subsystemListener(val);
+    },
+    get subsystemQuery() {
+        return this._subsystemQuery;
+    },
+    _subsystemListener: function(val) {},
+    registerSubsystemListener: function(listener){
+        this._subsystemListener = listener;
+    },
+
+    // Other Query Variables
+    _otherQuery: "",      //* Internal variable
+    set otherQuery(val) {
+        this._otherQuery = val;
+        this._otherListener(val);
+    },
+    get otherQuery() {
+        return this._otherQuery;
+    },
+    _otherListener: function(val) {},
+    registerOtherListener: function(listener){
+        this._otherListener = listener;
+    },
+
+    // Last existing data variable
+    _lastData: null,    //* Internal variable
+    get lastData() {
+        return this._lastData;
+    },
+
+    setAttribute: function(queryElem, queryText){
+
+        if(queryElem === "systemQuery")
+        {
+            GLOBAL_QUERY.systemQuery = queryText;
+        }
+        else if(queryElem === "subsystemQuery")
+        {
+            GLOBAL_QUERY.subsystemQuery = queryText;
+        }
+        else if(queryElem === "otherQuery")
+        {
+            GLOBAL_QUERY.otherQuery = queryText;
+        }
+    },
+
+    clearAttribute: function(queryElem){
+        this.setAttribute(queryElem, "");
+    },
+
+    queryDatatable: async function(){
+        if(this.fullQuery === "")
+        {
+            return undefined;
+        }
+        else
+        {
+            let lastData = await queryDatabase(this.fullQuery);
+            this._lastFullQuery = this.fullQuery;
+    
+            return lastData;
+        }
     }
 }
 
-// FUNCTION THAT FIRES EACH TIME GLOBAL_QUERY.query is changed (re-run the sql parser with the
-// new query)
-GLOBAL_QUERY.registerListener(function(val) {
-    console.log("Someone changed the value of GLOBAL_QUERY to " + val);
-});
+
+function constructWhereClause(sysQ, ssQ, othQ)
+{
+    if(sysQ !== "")
+    {
+        if(ssQ !== "")
+        {
+            if(othQ !== "")
+            {
+                return `${sysQ} AND ${ssQ} AND ${othQ}`;
+            }
+            else
+            {
+                return `${sysQ} AND ${ssQ}`;
+            }
+        }
+        else
+        {
+            if(othQ !== "")
+            {
+                return `${sysQ} AND ${othQ}`;
+            }
+            else
+            {
+                return `${sysQ}`;
+            }
+        }
+    }
+    else
+    {
+        if(ssQ !== "")
+        {
+            if(othQ !== "")
+            {
+                return `${ssQ} AND ${othQ}`;
+            }
+            else
+            {
+                return `${ssQ}`;
+            }
+        }
+        else
+        {
+            if(othQ !== "")
+            {
+                return `${othQ}`;
+            }
+            else
+            {
+                return "";
+            }
+        }
+    }
+}
 
 module.exports = {
     GLOBAL_QUERY: GLOBAL_QUERY
