@@ -35,16 +35,17 @@ var table =
     Description VARCHAR(512),
 
     StartDate DATE,
-    NumDays INT,
+    EndDate DATE,
 
     PercentCompleted INT NOT NULL,
 
     Assignee VARCHAR(64),
     Subsystem VARCHAR(64),
 
-    FOREIGN KEY (Subsystem) REFERENCES SubsystemsTable(Name),
+    ParentProj INT,
 
-    CHECK (NumDays >= 0),
+    FOREIGN KEY (Subsystem) REFERENCES SubsystemsTable(Name),
+    
     CHECK (PercentCompleted >= 0 AND PercentCompleted <= 100),
 
     PRIMARY KEY (ID)

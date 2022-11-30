@@ -3,12 +3,12 @@ var { createConn } = require('../sql-connection');
 let conn = createConn();
 
 let tempSql = `
-INSERT INTO DataTable (ID, IssueType, Title, StartDate, NumDays, PercentCompleted, Subsystem)
-VALUES (8,'Project', 'Rover Body Structure', '2022-8-28', 120, 24, 'Payload');
+INSERT INTO DataTable (ID, IssueType, Title, StartDate, EndDate, PercentCompleted, Subsystem, ParentProj)
+VALUES (4,'Task', 'Create wiring schematic & PCB', '2022-9-01', '2022-10-15', 100, 'Avionics', 1);
 `;
 
 let tempSq2l = `
-DELETE FROM DataTable WHERE ID = 1;
+DELETE FROM DataTable WHERE ID > 0;
 
 `;
 

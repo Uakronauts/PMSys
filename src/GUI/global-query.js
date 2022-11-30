@@ -19,6 +19,7 @@ var GLOBAL_QUERY = {
             SELECT *
             FROM DataTable
             WHERE ${constructWhereClause("", this._subsystemQuery, this._otherQuery)}
+            ORDER BY IssueType ASC
             `;
         }
         

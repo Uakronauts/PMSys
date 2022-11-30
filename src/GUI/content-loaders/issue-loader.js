@@ -106,7 +106,7 @@ function RDPtoDisplayRow(RDP, displayDiv, displayInd){
     let issueClass = `issueType-${RDP["IssueType"]} ic${displayInd % 3}`
 
     let rowHTML = `
-    <div class="col-sm-9 ${issueClass}">
+    <div id="iid${RDP["ID"]}" class="col-sm-9 ${issueClass}">
         <h2 class="${issueClass}"><strong>${RDP["Title"]} - [${makeLoadbar(RDP["PercentCompleted"])}]</strong></h2>
         <div class="row">
             <div class="col-sm-2">
@@ -124,7 +124,19 @@ function RDPtoDisplayRow(RDP, displayDiv, displayInd){
 
     rowDiv.innerHTML = rowHTML;
 
-    displayDiv.appendChild(rowDiv);
+    //find parent project and insert after
+    //because of the way this works, projects need loaded first
+    if(RDP["IssueType"] === "Task")
+    {
+        let parent = document.getElementById(`iid${RDP["ParentProj"]}`);
+
+        parent.insertBefore(rowDiv, null);  //??????
+    }
+    //jus put it at the end
+    else
+    {
+        displayDiv.appendChild(rowDiv);
+    }
 }
 
 function makeLoadbar(amt){
