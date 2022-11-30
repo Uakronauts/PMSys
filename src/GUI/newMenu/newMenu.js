@@ -15,21 +15,55 @@ function loadDropdownContent(){
 
         let tempData = await queryHighestID();
 
-        let highestID = tempData[0]["MAX(ID)"];
+        let highestID = tempData[0]["MAX(ID)"] + 1;
+
+        let modifyQuery = `
+        UPDATE DataTable
+
+        SET EndDate = '${document.getElementById("endDate").value}',
+            StartDate = '${document.getElementById("startDate").value}',
+            Description = '${document.getElementById("description").value}',
+            Title = '${document.getElementById("name").value}',
+            Subsystem='${document.getElementById("subsysDrp").innerText}',
+            PercentCompleted='${document.getElementById("days").value}'
+
+
+        WHERE Title='${document.getElementById("name").value}' AND Subsystem='${document.getElementById("subsysDrp").innerText}'
+        ;`;
+
+        console.log(modifyQuery);
+
+        //run the query & see if it succeeded
+        let modVal = await queryDatabase(modifyQuery);
+
+        //if not an instance of error, close the window
+        if(modVal instanceof Error){
+            console.warn(val.message);
+        }
+        else{
+            //window.close();
+        }
 
         let addQuery = `INSERT INTO 
-        DataTable (EndDate, StartDate, Name, Description, Subsystem, PercentCompleted, IssueType, ID)
+        DataTable (EndDate, StartDate, Title, Description, Subsystem, PercentCompleted, IssueType, ID)
         
         VALUES ('${document.getElementById("endDate").value}','${document.getElementById("startDate").value}',
         '${document.getElementById("name").value}', '${document.getElementById("description").value}',
-        '${document.getElementById("subsysDrp").innerText}', 0, 'Project', ${highestID})
+        '${document.getElementById("subsysDrp").innerText}', ${document.getElementById("days").value}, 'Project', ${highestID})
         ;`
 
         console.log(addQuery);
     
         //run the query & see if it succeeded
+        let addVal = await queryDatabase(addQuery);
 
         //if not an instance of error, close the window
+        if(addVal instanceof Error){
+            console.warn(val.message);
+        }
+        else{
+            window.close();
+        }
 
         //otherwise display the error & don't close so peeps can fix it
 
@@ -140,7 +174,7 @@ async function loadSubsystemContent(parentSys = "*"){
 
 
 const { exists } = require("original-fs");
-const { queryHighestID } = require("../../sql-drivers/sql-helpers");
+const { queryHighestID, queryDatabase } = require("../../sql-drivers/sql-helpers");
 
 function randomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min

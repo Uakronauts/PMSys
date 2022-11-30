@@ -1,10 +1,15 @@
 var { createConn } = require('../sql-connection');
+const { queryHighestID } = require('../sql-helpers');
 
 let conn = createConn();
 
+//let iid = (await queryHighestID())[0]["MAX(ID)"] + 1;
+
+//console.log(iid);
+
 let tempSql = `
 INSERT INTO DataTable (ID, IssueType, Title, StartDate, EndDate, PercentCompleted, Subsystem, ParentProj)
-VALUES (7,'Task', 'Create basic GUI for mobile platforms', '2022-10-01', '2022-12-17', 40, 'Avionics', 5);
+VALUES (12,'Task', 'Transition Module MasterCam', '2022-09-12', '2022-14-9', 100, 'Manufacturing', 10);
 `;
 
 let tempSq2l = `
