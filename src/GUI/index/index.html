@@ -41,20 +41,20 @@
 
             <div class="col-sm-4 bigbreathe-left">
                 <!-- Textbox for query input -->
-                <input class="form-control input-lg darkInput" id="inputlg" type="text"
+                <input class="form-control input-lg darkInput" id="otherQueryInput" type="text"
                         placeholder="🔎︎ search using custom filters">
             </div>
 
             <div class="col-sm-1 breathe-top">
                 <!-- Order by Dropdown -->
-                <div class="dropdown">
+                <!-- <div class="dropdown">
                     <button id="sortDrp" class="btn dropdown-toggle btnDropdown"
                         type="button" data-toggle="dropdown"><strong>Order By</strong>
                     <span class="caret"></span></button>
                     <ul class="dropdown-menu">
-                        <!-- This is loaded dynamically from the database (all subsystem names) -->
+                         This is loaded dynamically from the database (all subsystem names) 
                     </ul>
-                </div>
+                </div> -->
             </div>
 
             <!-- Opens the add window -->
@@ -69,15 +69,41 @@
         <div class="row">
             <ul id="queryDisplay" class="hidden">
                 <li class="floatLeft">Queries: </li>
-                <li id="systemQuery" class="queryDisplay floatLeft hidden"></li>
-                <li id="subsystemQuery" class="queryDisplay floatLeft hidden"></li>
-                <li id="otherQuery" class="queryDisplay floatLeft hidden"></li>
+                <li id="systemQuery" class="queryDisplay fillGreen floatLeft hidden"></li>
+                <li id="subsystemQuery" class="queryDisplay fillBlue floatLeft hidden"></li>
+                <li id="otherQuery" class="queryDisplay fillGold floatLeft hidden"></li>
             </ul>
         </div>
     </section>
 
+    <!-- Data Display Section -->
+    <section>
+        <div id="displayWrapper" class="flexDisplay">
+            <!-- Feedback for empty/failed queries in the middle of the wrapper -->
+            <!-- Hidden if the query is successful -->
+            <div id="displayFeedbackWrapper" class="absoluteCenter">
+                <h3 id="mainQueryFeedback" class="mainFeedback">☠️ Nothing to display...</h3>
+                <h5 id="feedbackHint" class="hintFeedback">Maybe add some filters</h5>
+            </div>
+
+            <div id="mainDisplayTableWrapper" class="hidden">
+                <h1 id="subsysLabel">Subsystem Name</h1>
+                <div id="mainDisplayTable">
+                    
+                    <!-- Loaded dynamically depending on the number of days selected -->
+                    <!--
+                        Creates strips of low opacity, alternating colors?
+                    
+                    -->
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
     <!-- Auto Updater -->
-    <div class="version">
+    <div class="version abs-bottom-left">
         <strong id="version"></strong>
     </div>
 
@@ -89,6 +115,12 @@
         <button id="restart-button" class="hidden" onclick="restartApp()">Restart</button>
     </div>
     <!-- End of Auto Updater -->
+
+    <!-- Warning Templates -->
+
+    <div id="warningTemp" class="alert alert-warning hidden errorDisplay" role="alert"></div>
+
+    <!-- End of warning templates -->
 
 </body>
     <script src="./index.js"></script>
