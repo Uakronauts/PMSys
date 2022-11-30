@@ -3,8 +3,13 @@ var { createConn } = require('../sql-connection');
 let conn = createConn();
 
 let tempSql = `
-INSERT INTO SubsystemsTable (Name, ParentSys)
-VALUES ('Marketing','ASL');
+INSERT INTO DataTable (ID, IssueType, Title, StartDate, NumDays, PercentCompleted, Subsystem)
+VALUES (8,'Project', 'Rover Body Structure', '2022-8-28', 120, 24, 'Payload');
+`;
+
+let tempSq2l = `
+DELETE FROM DataTable WHERE ID = 1;
+
 `;
 
 let sql = tempSql;

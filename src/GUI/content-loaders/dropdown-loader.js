@@ -98,6 +98,8 @@ var populateDropdown = function(dropdownElem, elems, spacerAttribute = undefined
                 // get the subsystem query & set it to the appropriate value
                 document.getElementById("subsystemQuery");
                 subsystemQuery.innerText = `Subsystem = '${this.innerText}'`;
+
+                document.getElementById("subsysLabel").innerHTML = `<strong>${this.innerText}</strong>`
                 
                 // add it to the global query
                 GLOBAL_QUERY.setAttribute("subsystemQuery", subsystemQuery.innerText);

@@ -21,6 +21,13 @@ var populateIssueTable = async function(){
     if(await verifyQueryData(data)){
         showTable();
 
+        let display = document.getElementById("mainDisplayTable");
+        display.innerHTML = '';
+        
+        for(let i = 0; i < data.length; ++i)
+        {
+            RDPtoDisplayRow(data[i], display, i);
+        }
         
 
 
@@ -86,6 +93,55 @@ function displayFeedback(feedbackCode)
         feedbackHint.innerText = feedbackCode;
     }
 
+}
+
+//accepts a row data packet object, returns a formatted div of the content within that packet.
+function RDPtoDisplayRow(RDP, displayDiv, displayInd){
+    console.log(RDP);
+
+    let rowDiv = document.createElement("div");
+    rowDiv.classList.add('row');
+    rowDiv.classList.add('issueWrapper');
+
+    let issueClass = `issueType-${RDP["IssueType"]} ic${displayInd % 3}`
+
+    let rowHTML = `
+    <div class="col-sm-9 ${issueClass}">
+        <h2 class="${issueClass}"><strong>${RDP["Title"]} - [${makeLoadbar(RDP["PercentCompleted"])}]</strong></h2>
+        <div class="row">
+            <div class="col-sm-2">
+                <h6 class="${issueClass}">Start Date: <strong>${RDP["StartDate"].toDateString()}</strong></h6>
+            </div>
+            <div class="col-sm-2">
+                <h6 class="${issueClass}">Number of Days: <strong>${RDP["NumDays"]}</strong></h6>
+            </div>
+            <div class="col-sm-2">
+                <h6 class="${issueClass}"><strong>${RDP["PercentCompleted"]}</strong>% completed</h6>
+            </div>
+        </div>
+    </div>
+    `;
+
+    rowDiv.innerHTML = rowHTML;
+
+    displayDiv.appendChild(rowDiv);
+}
+
+function makeLoadbar(amt){
+    let temp = '';
+
+    let numCmp = amt/10;
+
+    for(let i = 0; i < numCmp; ++i)
+    {
+        temp = temp + '█';
+    }
+    for(let i = 0; i < 10-numCmp; ++i)
+    {
+        temp = temp + '⠀';
+    }
+
+    return temp;
 }
 
 function hideFeedback(){

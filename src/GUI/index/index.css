@@ -133,6 +133,9 @@ div#mainDisplayTableWrapper{
 
   background-color: rgba(255, 255, 255, 0.06);
   border-radius: 6px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 div#mainDisplayTable{
@@ -143,6 +146,7 @@ div#mainDisplayTable{
 h1#subsysLabel{
   color: #FFFFFF;
   font-weight: bold;
+  margin-left: 1%;
 }
 
 /* div#timeline{
@@ -185,3 +189,72 @@ div.absoluteCenter{
   
   width:90%;
  }
+
+/* DYNAMIC QUERY RESULTS STYLE */
+
+div.issueWrapper{
+  margin-bottom: 1%;
+  margin-left: 1%;
+}
+
+div.issueType-Project{
+  margin-left: 1%;
+}
+
+div.issueType-Task{
+  margin-left: 6%;
+}
+
+h2.issueType-Project{
+
+}
+
+h6.issueType-Project{
+  
+}
+
+div.ic0{
+  background-color: #b40d9557;
+  border-radius: 5px;
+  border-color: #b40d95;
+  border-style: solid;
+}
+
+div.ic1{
+  background-color: #02A12257;
+  border-radius: 5px;
+  border-color: #02A122;
+  border-style: solid;
+}
+
+div.ic2{
+  background-color: #D93F0B57;
+  border-radius: 5px;
+  border-color: #D93F0B;
+  border-style: solid;
+}
+
+
+h2.ic0{
+  color: #b40d95;
+}
+
+h2.ic1{
+  color: #02A122;
+}
+
+h2.ic2{
+  color: #D93F0B;
+}
+
+h6.ic0{
+  color: #b40d95;
+}
+
+h6.ic1{
+  color: #02A122;
+}
+
+h6.ic2{
+  color: #D93F0B;
+}
