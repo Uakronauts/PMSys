@@ -1,6 +1,6 @@
 
 var { GLOBAL_QUERY } = require("../global-query");
-const { getTableContent, populateDropdown } = require("../sql-loader");
+const { getTableContent } = require("../content-loaders/dropdown-loader");
 
 window.onload = loadDropdownContent;
 

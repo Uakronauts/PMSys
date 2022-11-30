@@ -165,41 +165,43 @@ function createQueryClose(elem)
 // #region OTHER INPUT
 
 otherInputBox = document.getElementById('otherQueryInput');
-otherInputBox.addEventListener('keyup', async function onEvent(e) {
-    // If enter key is pressed.
-    if (e.keyCode === 13) {
-        //check the value for sensitive keywords & show the warning if needed
-        let ret = await detectSqlKeywords(otherInputBox.value, function(query, keyword) {
-            console.warn(`${query} contains ${keyword}`);
+if(otherInputBox !== null){
+    otherInputBox.addEventListener('keyup', async function onEvent(e) {
+        // If enter key is pressed.
+        if (e.keyCode === 13) {
+            //check the value for sensitive keywords & show the warning if needed
+            let ret = await detectSqlKeywords(otherInputBox.value, function(query, keyword) {
+                console.warn(`${query} contains ${keyword}`);
 
-            let warningMsg = document.getElementById("warningTemp");
-            warningMsg.innerText = `OTHER QUERY WARNING: '${query}' contains '${keyword}'`;
-            warningMsg.classList.remove("hidden");
+                let warningMsg = document.getElementById("warningTemp");
+                warningMsg.innerText = `OTHER QUERY WARNING: '${query}' contains '${keyword}'`;
+                warningMsg.classList.remove("hidden");
 
-            setTimeout(() => {
-                warningMsg.classList.add("hidden");
-            }, 5000)
+                setTimeout(() => {
+                    warningMsg.classList.add("hidden");
+                }, 5000)
 
-        });
-        
-        //?depending on the way we want to do this (execute with/without an error)
+            });
+            
+            //?depending on the way we want to do this (execute with/without an error)
 
-        //add the text to the global query & create the filter object
-        GLOBAL_QUERY.otherQuery = otherInputBox.value;
+            //add the text to the global query & create the filter object
+            GLOBAL_QUERY.otherQuery = otherInputBox.value;
 
-        let otherQuery = document.getElementById("otherQuery");
+            let otherQuery = document.getElementById("otherQuery");
 
-        otherQuery.innerText = otherInputBox.value;
-        otherInputBox.value = '';
+            otherQuery.innerText = otherInputBox.value;
+            otherInputBox.value = '';
 
-        createQueryClose(otherQuery);
+            createQueryClose(otherQuery);
 
-        unhideElement(otherQuery);
+            unhideElement(otherQuery);
 
-        unhideQueryDisplay();
-    }
+            unhideQueryDisplay();
+        }
 
-});
+    });
+}
 
 // #endregion
 // ------------------------------------------------- \\
