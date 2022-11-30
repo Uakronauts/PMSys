@@ -83,3 +83,14 @@ function launchNewPage(){
 
 // ------------------------------------------------- \\
 
+
+function randomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
+const STAR_COUNT = 1000
+let result = ""
+for(let i = 0; i < STAR_COUNT; i++){
+    result += `${randomNumber(-1000, 1000)}vw ${randomNumber(-1000, 1000)}vh ${randomNumber(-1000, 1000)}px ${randomNumber(-1000, 1000)}px #fff,`
+}
+console.log(result.substring(0, result.length - 1))

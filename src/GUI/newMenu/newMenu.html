@@ -3,12 +3,77 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="newMenu.css">
+
+    <script src="../../../node_modules/jquery/dist/jquery.min.js"></script>
+    <script> window.jQuery = window.$ = require('jquery'); //fixes bootstrap???? </script>
+    <script src="../../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
 
+<body>
+
+    <!-- Top Menu Section -->
+    <section> 
+        <div class="header-row row">
+            <div class="col-sm-1 breathe-top">
+                <!-- System Dropdown -->
+                <div class="dropdown">
+                    <label style="position:relative; left: 600px; top:70px;color:rgb(21, 21, 22)">
+                    <button id="systemDrp" class="btn dropdown-toggle btnDropdown"
+                        type="button" data-toggle="dropdown"><strong>⚗️System</strong>
+                    <span class="caret"></span></button>
+                    <ul id="sysDrpContent" class="dropdown-menu">
+                        <!-- This is loaded dynamically from the database (all system names) -->
+                    </label>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-sm-1 breathe-left breathe-top">
+                <!-- Subsystem Dropdown -->
+                <div id="subsysDrpDiv" class="dropdown">
+                    <label style="position:relative; left: 800px; top:70px;color:rgb(4, 4, 4)">
+                        <button id="subsysDrp" class="btn dropdown-toggle btnDropdown" 
+                        type="button" data-toggle="dropdown"><strong>⚒️Subsystem</strong>
+                        <span class="caret"></span></button>
+                    <ul id="subsysDrpContent" class="dropdown-menu">
+                        <!-- This is loaded dynamically from the database (all subsystem names) -->
+                    </label>
+                    </ul>
+                </div>
+            </div>
+
+            
+    </section>
+
+    <!-- Query Details Section -->
+    <section>
+        <div class="row">
+            <ul id="queryDisplay" class="hidden">
+                <li class="floatLeft">Queries: </li>
+                <li id="systemQuery" class="queryDisplay floatLeft hidden"></li>
+                <li id="subsystemQuery" class="queryDisplay floatLeft hidden"></li>
+                <li id="otherQuery" class="queryDisplay floatLeft hidden"></li>
+            </ul>
+        </div>
+    </section>
+</body>
+
+
 <!-- Space Background -->
-<div class='stars'></div>
-<div class='twinkling'></div>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=2.0">
+    <link rel="stylesheet" href="newMenu.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="stars"></div>
+</body>
+</html>
 
 <!-- Akronauts Logo -->
   <head>
@@ -17,68 +82,19 @@
   img.one {
     height: 200;
     width: 200;
-    margin-left: 55px;
+    margin-left: 140px;
     position: absolute; top: 1px; left: 1; width: 200px; height: 200px;
   }
   </style>
 
   </head>
   <body>
-  <img class="one"  src="C:\Users\jenic\OneDrive - The University of Akron\Akronauts\SO_logo_Akronauts_Blue.png" width="200" height="200";> </a>
+  <img class="one"  src="C:\Users\jenic\OneDrive\Documents\GitHub\PMSys\resources\img.one" width="200" height="200";> </a>
   <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
  
-  <h2 style= "position:relative; left:80px; top:2px; color:rgb(243, 243, 245)">🕸Fun Links🕸 </h2>
-  <h3 style="position:relative; left:53px; top:2px;color:rgb(243, 243, 245)">*links to team GitHub, Teams, OneDrive, Discord*</h3>
-
-  <select name="test1" id="test1">
-    <option value="Select">⚗️System</option>
-    <option value="a">ISL</option>
-    <option value="b">PSL</option>
-    <option value="c">SSL</option>
- </select>
- 
- 
- <select id="test2" name="test2">
-  <option value="Select">⚒️Subsystem </option>
-    <option class="Select" value= "1"> </option>
-     <option class="Select" value="2">Avionics</option>
-    <option class="Select" value="3">Recovery</option>
-    <option class="Select" value="4">Payload</option>
-    <option class="Select" value="5">NanoSat</option>
-    <option class="Select" value="6">BalloonSat</option>
-    <option class="Select" value="7">Liquid Engine</option>
-    <option class="Select" value="8">Solid Motor</option>
-    <option class="Select" value="9">Nozzle Carrier</option>
-    <option class="Select" value="10">Grain Geometry</option>
-    <option class="Select" value="11">Head On Ignition</option>
-    <option class="Select" value="12">Vehicle Design</option>
-    <option class="Select" value="13">Flight Analysis</option>
-    <option class="Select" value="14">Manufacturing</option>
-    <option class="Select" value="15">Composites</option>
-    <option class="a" value="a">Avionics</option>
-    <option class="a" value="b">Recovery</option>
-    <option class="a" value="c">Payload</option>
-    <option class="a" value="d">NanoSat</option>
-    <option class="a" value="e">BalloonSat</option>
-    <option class="b" value="1">Liquid Engine</option>
-    <option class="b" value="2">Solid Motor</option>
-    <option class="b" value="3">Nozzle Carrier</option>
-    <option class="b" value="4">Grain Geometry</option>
-    <option class="b" value="5">Head On Ignition</option>
-    <option class="c" value="z">Vehicle Design</option>
-    <option class="c" value="y">Flight Analysis</option>
-    <option class="c" value="x">Manufacturing</option>
-    <option class="c" value="w">Composites</option>
-  </select>
-
-  
-<select name="test3" id="test3">
-  <option value="Select">🧩Issue Type</option>
-     <option value="a">Project</option>
-     <option value="b">Task</option>
-  </select>
-</body>
-<html>
+  <h3 style= "position:relative; left:150px; top:2px; color:rgb(243, 243, 245)">🕸Fun Links🕸 </h3>
+  <h4 style="position:relative; left:30px; top:2px;color:rgb(243, 243, 245)"> *links to team GitHub, Teams, OneDrive, Discord*</h4>
+  <body>
   
 
     
@@ -110,4 +126,29 @@ command.Parameters.AddWithValue("@numDays", numberOfDays);
 </div>
 </body>
 <script src="../auto-updater/updater.js"></script>
+<script src="./newMenu.js"></script>
+
+
+<!DOCTYPE html>
+<html>
+<body>
+
+  <label style= "position:relative; left:400px; top:-120px; color:rgb(243, 237, 237)" for="startDate"> Start Date 📅  <input type="date" id="startDate" name="startDate"> </label>
+  
+
+  <label style= "position:relative; left:400px; top:-120px; color:rgb(245, 241, 241)" for="endDate"> End Date 📅  <input type="date" id="endDate" name="endDate"> </label>
+
+
+  <label style= "position:relative; left:400px; top:-120px; color:rgb(243, 240, 240)" for="days"> Days 🔢  <input type="number" id="days" name="days"> </label>
+  
+ 
+  <label style= "position:relative; right:40px; top:-70px; color:rgb(238, 238, 246)" for="issueTitle"> <input type="text" id="name" name="issueTitle" placeholder="Issue Title" rows="15"></label>
+  <label style= "position:relative; left:492px; top:-50px; color:rgb(242, 242, 246)" for="comments"> <textarea id="description" name="comments" placeholder="Comments..." rows="5" cols="70"></textarea> <br><br><br></label>
+  
+  <label style= "position:relative; left:489px; top:-50px; color:#4EA957" for="submit">  <button id="submit" type="button">Submit</button></label>
+ 
+
+
+ 
+</body>
 </html>
