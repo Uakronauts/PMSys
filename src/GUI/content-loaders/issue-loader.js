@@ -24,11 +24,11 @@ var populateIssueTable = async function(){
         let display = document.getElementById("mainDisplayTable");
         display.innerHTML = '';
 
-        let funnyColour = getRandomInt(3);
+        //let funnyColour = getRandomInt(3);
         
         for(let i = 0; i < data.length; ++i)
         {
-            RDPtoDisplayRow(data[i], display, 3);
+            RDPtoDisplayRow(data[i], display, 4);
         }
         
         if(display.innerHTML === '')
