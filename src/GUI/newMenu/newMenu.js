@@ -16,11 +16,14 @@ function loadDropdownContent(){
         console.log(
             `INSERT INTO 
             DataTable (endDate, startDate, name, description, subsystem, system)
-            VALUES (${document.getElementById("endDate").value},${document.getElementById("startDate").value},${document.getElementById("name").value}, ${document.getElementById("description").value})
+            
+            VALUES (${document.getElementById("endDate").value},${document.getElementById("startDate").value},
+            ${document.getElementById("name").value}, ${document.getElementById("description").value},
+            ${document.getElementById("subsysDrp").innerText}, ${document.getElementById("systemDrp").innerText})
             ;`
         );
     
-    window.close();
+    //window.close();
     });
 }
 
@@ -76,7 +79,7 @@ var poopulateDropdown = function(dropdownElem, elems, spacerAttribute = undefine
             // auto select the appropriate parent system from the systems dropdown by
             // finding and "clicking" the appropriate li element
             liElem.addEventListener('click', function(){
-                let elemGuy = document.getElementById("subSystemDrp");
+                let elemGuy = document.getElementById("subsysDrp");
                 elemGuy.innerHTML = `<strong>${this.innerText}</strong>`;
 
             })
