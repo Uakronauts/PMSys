@@ -55,7 +55,7 @@ var queryDatabase = async function(sql){
 
 // Query the PMSys database for the highest ID
 var queryHighestID = async function(){
-    let tableName = 'datatable';     //TODO tablename
+    let tableName = 'DataTable';     //TODO tablename
 
     let sql = `
         SELECT MAX(ID)
@@ -64,7 +64,7 @@ var queryHighestID = async function(){
 
     let res = await queryDatabase(sql);
 
-    return res.ID;
+    return res;
 }
 
 // Converts the result of a sql query into text

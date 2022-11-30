@@ -11,19 +11,30 @@ function loadDropdownContent(){
     loadSystemContent();
     loadSubsystemContent();
 
-    document.getElementById("submit").addEventListener('click', function(){
+    document.getElementById("submit").addEventListener('click', async function(){
 
-        console.log(
-            `INSERT INTO 
-            DataTable (endDate, startDate, name, description, subsystem, system)
-            
-            VALUES (${document.getElementById("endDate").value},${document.getElementById("startDate").value},
-            ${document.getElementById("name").value}, ${document.getElementById("description").value},
-            ${document.getElementById("subsysDrp").innerText}, ${document.getElementById("systemDrp").innerText})
-            ;`
-        );
+        let tempData = await queryHighestID();
+
+        let highestID = tempData[0]["MAX(ID)"];
+
+        let addQuery = `INSERT INTO 
+        DataTable (EndDate, StartDate, Name, Description, Subsystem, PercentCompleted, IssueType, ID)
+        
+        VALUES ('${document.getElementById("endDate").value}','${document.getElementById("startDate").value}',
+        '${document.getElementById("name").value}', '${document.getElementById("description").value}',
+        '${document.getElementById("subsysDrp").innerText}', 0, 'Project', ${highestID})
+        ;`
+
+        console.log(addQuery);
     
-    //window.close();
+        //run the query & see if it succeeded
+
+        //if not an instance of error, close the window
+
+        //otherwise display the error & don't close so peeps can fix it
+
+
+        //window.close();
     });
 }
 
@@ -128,7 +139,8 @@ async function loadSubsystemContent(parentSys = "*"){
 
 
 
-const { exists } = require("original-fs")
+const { exists } = require("original-fs");
+const { queryHighestID } = require("../../sql-drivers/sql-helpers");
 
 function randomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min
