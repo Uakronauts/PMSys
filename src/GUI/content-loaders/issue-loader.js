@@ -5,11 +5,16 @@ var registerAttributeListeners = function()
     GLOBAL_QUERY.registerSubsystemListener(function(val){
         //console.log(`Subsystem query changed! ${val}`);
 
-        if(val !== "")
-        {
+        // if(val !== "")
+        // {
             populateIssueTable();
-        }
+        //}
     });
+
+    GLOBAL_QUERY.registerOtherListener(function(val){
+        //console.log(`Other query changed! ${val}`);
+        populateIssueTable();
+    })
 }
 
 // load the issue content into a container (div) element
