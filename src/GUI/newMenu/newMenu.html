@@ -9,6 +9,8 @@
     <script src="../../../node_modules/jquery/dist/jquery.min.js"></script>
     <script> window.jQuery = window.$ = require('jquery'); //fixes bootstrap???? </script>
     <script src="../../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script src="./newMenu.js"></script>
 </head>
 
 <body>
@@ -47,19 +49,6 @@
             
     </section>
 
-    <!-- Query Details Section -->
-    <section>
-        <div class="row">
-            <ul id="queryDisplay" class="hidden">
-                <li class="floatLeft">Queries: </li>
-                <li id="systemQuery" class="queryDisplay floatLeft hidden"></li>
-                <li id="subsystemQuery" class="queryDisplay floatLeft hidden"></li>
-                <li id="otherQuery" class="queryDisplay floatLeft hidden"></li>
-            </ul>
-        </div>
-    </section>
-</body>
-
 
 <!-- Space Background
 <html lang="en">
@@ -77,78 +66,28 @@
 
 <!-- Akronauts Logo -->
   <head>
-  <style>
   
-  img.one {
-    height: 200;
-    width: 200;
-    margin-left: 140px;
-    position: absolute; top: 1px; left: 1; width: 200px; height: 200px;
-  }
-  </style>
-
-  </head>
-  <body>
-  <img class="one"  src="C:\Users\jenic\OneDrive\Documents\GitHub\PMSys\resources\img.one" width="200" height="200";> </a>
+  <img class="one"  src="../../../resources/logo-akronauts.svg" width="200" height="200";> </a>
   <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
  
   <h3 style= "position:relative; left:150px; top:2px; color:rgb(243, 243, 245)">🕸Fun Links🕸 </h3>
   <h4 style="position:relative; left:30px; top:2px;color:rgb(243, 243, 245)"> *links to team GitHub, Teams, OneDrive, Discord*</h4>
-  <body>
+
+
+  <label style= "position:relative; left:400px; top:-120px; color:rgb(243, 237, 237)" for="startDate"> Start Date 📅  <input type="date" id="startDate" name="startDate" class="inputText"> </label>
   
 
-    
-<!-- Edit/Update Function
-command.CommandText = "UPDATE Table
-SET ID = @id Where System = @sys, Subsystem = @subsys, Name = @name, Description = @desc, Start Date = @sDate, and Number of Days = @numDays;
-[10:46 AM]
-command.Parameters.AddWithValue("@sys", system);
-command.Parameters.AddWithValue("@subSys", subSystem);
-command.Parameters.AddWithValue("@name", name);
-command.Parameters.AddWithValue("@desc", description);
-command.Parameters.AddWithValue("@sDate", startDate);
-command.Parameters.AddWithValue("@numDays", numberOfDays); 
-[10:46 AM]
--->
-
-<script src="jquery-3.2.1.min.js"> 
-</script> 
-
-<!-- Auto-Updater -->
-<div class="version">
-    <p id="version"></p>
-</div>
-
-<div id="notification" class="hidden">
-    <p id="message"></p>
-    <button id="close" onClick="closeNotification()">Close</button>
-    <button id="restart-button" onClick="restartApp()" class="hidden">Restart</button>
-</div>
-</body>
-<script src="../auto-updater/updater.js"></script>
-<script src="./newMenu.js"></script>
+  <label style= "position:relative; left:400px; top:-120px; color:rgb(245, 241, 241)" for="endDate"> End Date 📅  <input type="date" id="endDate" name="endDate"  class="inputText"> </label>
 
 
-<!DOCTYPE html>
-<html>
-<body>
-
-  <label style= "position:relative; left:400px; top:-120px; color:rgb(243, 237, 237)" for="startDate"> Start Date 📅  <input type="date" id="startDate" name="startDate"> </label>
-  
-
-  <label style= "position:relative; left:400px; top:-120px; color:rgb(245, 241, 241)" for="endDate"> End Date 📅  <input type="date" id="endDate" name="endDate"> </label>
-
-
-  <label style= "position:relative; left:400px; top:-120px; color:rgb(243, 240, 240)" for="days"> Days 🔢  <input type="number" id="days" name="days"> </label>
+  <label style= "position:relative; left:400px; top:-120px; color:rgb(243, 240, 240)" for="days"> Days 🔢  <input type="number" id="days" name="days" class="inputText"> </label>
   
  
-  <label style= "position:relative; right:40px; top:-70px; color:rgb(238, 238, 246)" for="issueTitle"> <input type="text" id="name" name="issueTitle" placeholder="Issue Title" rows="15"></label>
-  <label style= "position:relative; left:492px; top:-50px; color:rgb(242, 242, 246)" for="comments"> <textarea id="description" name="comments" placeholder="Comments..." rows="5" cols="70"></textarea> <br><br><br></label>
+  <label style= "position:relative; right:40px; top:-70px; color:rgb(238, 238, 246)" for="issueTitle"> <input type="text" id="name"  class="inputText" name="issueTitle" placeholder="Issue Title" rows="15"></label>
+  <label style= "position:relative; left:492px; top:-50px; color:rgb(242, 242, 246)" for="comments"> <textarea id="description"  class="inputText" name="comments" placeholder="Comments..." rows="5" cols="70"></textarea> <br><br><br></label>
   
   <label style= "position:relative; left:489px; top:-50px; color:#4EA957" for="submit">  <button id="submit" type="button">Submit</button></label>
  
-
-
  
 </body>
 </html>
