@@ -121,6 +121,52 @@ span.queryClose {
 
 span.queryClose:hover {color: #000000;}
 
+
+/* Space Background */
+body{
+  background-color: #202020;
+}
+
+.stars{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  height: 5px;
+  width: 5px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: -37vw -46vh 0px 0px #fff,-47vw -15vh 3px 2px #fff,9vw -41vh 3px 3px #fff,13vw 17vh 1px 0px #fff,-9vw -47vh 3px 0px #fff,-24vw 42vh 1px 0px #fff,-5vw -50vh 2px 1px #fff,-8vw 37vh 3px 1px #fff,-15vw 34vh 2px 0px #fff,-15vw 49vh 1px 3px #fff,-12vw -21vh 2px 3px #fff,-4vw -29vh 2px 1px #fff,-8vw 31vh 3px 0px #fff,48vw -32vh 0px 3px #fff,44vw 24vh 2px 0px #fff,21vw -7vh 0px 3px #fff,-41vw 31vh 0px 2px #fff,45vw 6vh 2px 0px #fff,-9vw 45vh 1px 2px #fff,19vw 22vh 1px 1px #fff,-41vw -21vh 0px 3px #fff,10vw -46vh 2px 3px #fff,-11vw -12vh 0px 2px #fff,48vw 36vh 1px 3px #fff,17vw -44vh 0px 3px #fff,-23vw -10vh 0px 0px #fff,-42vw 19vh 0px 0px #fff,26vw -35vh 2px 1px #fff,37vw -24vh 0px 2px #fff,-48vw 26vh 0px 2px #fff,43vw 22vh 0px 3px #fff,-29vw -44vh 3px 2px #fff,-42vw 48vh 1px 3px #fff,-15vw 4vh 2px 2px #fff,-4vw -28vh 3px 2px #fff,-11vw 20vh 3px 2px #fff,-49vw -16vh 2px 0px #fff,-23vw -7vh 0px 3px #fff,30vw 39vh 1px 0px #fff,-2vw 12vh 0px 0px #fff,-10vw -34vh 2px 0px #fff,36vw 40vh 1px 3px #fff,26vw 29vh 0px 2px #fff,33vw 22vh 1px 2px #fff,44vw -31vh 1px 1px #fff,-24vw -17vh 2px 3px #fff,-43vw 34vh 1px 1px #fff,38vw 50vh 1px 3px #fff,-37vw 38vh 0px 0px #fff,-8vw 36vh 3px 0px #fff,-11vw 23vh 3px 0px #fff,18vw 37vh 3px 3px #fff,-47vw 42vh 3px 1px #fff,35vw -31vh 1px 3px #fff,-6vw 48vh 2px 0px #fff,-22vw 14vh 3px 3px #fff,42vw -50vh 2px 1px #fff,-9vw -2vh 2px 0px #fff,-23vw -43vh 0px 0px #fff,-14vw 33vh 2px 2px #fff,39vw -39vh 0px 0px #fff,10vw -21vh 3px 2px #fff,-32vw 38vh 1px 1px #fff,39vw -21vh 1px 1px #fff,32vw -46vh 1px 3px #fff,-35vw -44vh 0px 2px #fff,45vw -44vh 0px 3px #fff,-41vw 13vh 2px 1px #fff,13vw -25vh 0px 2px #fff,-31vw 22vh 2px 3px #fff,-49vw 45vh 2px 0px #fff,19vw -39vh 0px 1px #fff,16vw -39vh 3px 0px #fff,9vw 19vh 1px 2px #fff,43vw 26vh 3px 1px #fff,29vw -21vh 0px 3px #fff,-40vw -13vh 1px 2px #fff,25vw 9vh 1px 0px #fff,-43vw 31vh 1px 3px #fff,35vw 0vh 0px 3px #fff,6vw 49vh 2px 1px #fff,-12vw 39vh 2px 1px #fff,45vw 4vh 1px 1px #fff,46vw 9vh 1px 1px #fff,49vw 29vh 2px 1px #fff,41vw -1vh 1px 1px #fff,-37vw 34vh 1px 1px #fff,27vw 12vh 1px 3px #fff,-13vw -8vh 3px 0px #fff,-19vw 43vh 0px 2px #fff,18vw 7vh 0px 3px #fff,-44vw 33vh 1px 2px #fff,22vw 3vh 1px 3px #fff,-45vw 46vh 0px 1px #fff,-4vw 2vh 3px 3px #fff,-21vw 28vh 3px 1px #fff,44vw 19vh 1px 2px #fff,-22vw 44vh 2px 3px #fff,-34vw 46vh 1px 3px #fff,42vw -24vh 3px 0px #fff;
+  animation: zoom 10s alternate infinite;
+  z-index: -9999;
+}
+
+@keyframes zoom {
+  0%{
+      transform: scale(1);
+  }
+  100%{
+      transform: scale(1.5);
+  }
+}
+
+
+
+
+@keyframes move-twink-back {
+from {background-position:0 0;}
+to {background-position:-10000px 5000px;}
+}
+
+@keyframes move-clouds-back {
+from {background-position:0 0;}
+to {background-position:10000px 0;}
+}
+
+:root{
+  --transitionSpeed: 200ms;
+  --font: Arial;
+}
+
 /* MAIN DATA GRID */
 div#mainDisplayTableWrapper{
   position:absolute;
