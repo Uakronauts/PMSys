@@ -29,7 +29,12 @@ var populateIssueTable = async function(){
             RDPtoDisplayRow(data[i], display, i);
         }
         
-
+        if(display.innerHTML === '')
+        {
+            hideTable();
+            let blanks = [];
+            verifyQueryData(blanks);
+        }
 
     }
     else
@@ -113,7 +118,7 @@ function RDPtoDisplayRow(RDP, displayDiv, displayInd){
                 <h6 class="${issueClass}">Start Date: <strong>${RDP["StartDate"].toDateString()}</strong></h6>
             </div>
             <div class="col-sm-2">
-                <h6 class="${issueClass}">Number of Days: <strong>${RDP["NumDays"]}</strong></h6>
+                <h6 class="${issueClass}">End Date: <strong>${RDP["EndDate"].toDateString()}</strong></h6>
             </div>
             <div class="col-sm-2">
                 <h6 class="${issueClass}"><strong>${RDP["PercentCompleted"]}</strong>% completed</h6>
@@ -129,8 +134,8 @@ function RDPtoDisplayRow(RDP, displayDiv, displayInd){
     if(RDP["IssueType"] === "Task")
     {
         let parent = document.getElementById(`iid${RDP["ParentProj"]}`);
-
-        parent.insertBefore(rowDiv, null);  //??????
+        if(parent !== null)
+            parent.insertBefore(rowDiv, null);  //??????
     }
     //jus put it at the end
     else
